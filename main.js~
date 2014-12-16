@@ -4,7 +4,7 @@ window.onload = function() {
     var WIDTH=400;
     var HEIGHT=320;
     var game = new Game(WIDTH,HEIGHT);
-
+    
     game.rootScene.backgroundColor = "blue";
     game.fps = 30;
     game.preload('images/chara1.png', 'images/map0.png');
@@ -76,7 +76,8 @@ window.onload = function() {
 	
         kuma.addEventListener('enterframe', function(e) {
 		if(kuma.vx != 0){
-		    if(mapdirect[i]
+		    kuma.x += kuma.vx*16;
+		    kuma.vx =0;
 		    if(WIDTH-40<=kuma.x){
 			kuma.x =WIDTH-40;
 			t=0;

@@ -76,7 +76,7 @@ window.onload = function() {
 	
         kuma.addEventListener('enterframe', function(e) {
 		if(kuma.vx != 0){
-		    if(mapdirect[i]
+		    if(mapdirect[i]==1
 		    if(WIDTH-40<=kuma.x){
 			kuma.x =WIDTH-40;
 			t=0;
