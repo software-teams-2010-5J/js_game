@@ -76,7 +76,8 @@ window.onload = function() {
 	
         kuma.addEventListener('enterframe', function(e) {
 		if(kuma.vx != 0){
-		    if(mapdirect[i]
+		    kuma.x += kuma.vx*16;
+		    kuma.vx = 0;
 		    if(WIDTH-40<=kuma.x){
 			kuma.x =WIDTH-40;
 			t=0;
@@ -88,8 +89,7 @@ window.onload = function() {
 		    console.log(kuma.x);
 		    console.log(mapArray[0][0])
 		};
-
-	    });
+	});
     };
     game.start();
 };
