@@ -28,6 +28,11 @@ function preloadAssets(){
     game.start();
 }
 
+var Player = enchant.Class.create(enchant.Sprite,{
+	initialize: function(w,h){
+	    enchant.Sprite.call(this,w,h);
+	}
+    });
 function init(){
     
     t=1;

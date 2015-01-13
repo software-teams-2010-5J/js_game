@@ -1,0 +1,15 @@
+<!--<form name="test">
+--><input type="file" id="selfile"><br>
+<!--<textarea name="txt" rows="10" cols="50" readonly></textarea>
+<input id="viewfile" type="file" name="viewfile">-->
+</form>
+
+<script>
+  var obj = document.getElementById("selfile");
+  obj.addEventListener("change",function(evt){
+  var file = evt.target.files;
+  console.log(file[0].name);
+  console.log(file[0].name);
+
+},false);
+</script>
