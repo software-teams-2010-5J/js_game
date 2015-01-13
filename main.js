@@ -95,20 +95,29 @@ window.onload = function() {
 			kuma.vx--;
 			kumai+=1;
 		    }
+			 ];
+	map.loadData(mapArray);
+	game.rootScene.addChild(map);
+        game.rootScene.addChild(kuma);
+	
+	
+	
+        kuma.addEventListener('enterframe', function(e) {
+		if(kuma.vx != 0){
+		    kuma.x += kuma.vx*16;
+		    kuma.vx = 0;
 		    if(WIDTH-40<=kuma.x){
 			kuma.x =WIDTH-40;
 		    }
 		    if(kuma.x<8){
 			kuma.x =8; 
-		    }
-		}
-		t=1;
-		console.log(kuma.v);		
-		console.log(t);
-	    }
-
+			t =1;
+		    };
+		    console.log(kuma.x);
+		    console.log(mapArray[0][0])
+		};
 	});
-    }
+    };
     game.start();
-}
+	};
     
