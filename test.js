@@ -10,6 +10,7 @@ var mapdirect;
 var WIDTH=480;
 var HEIGHT=320;
 var t;
+var text = new Label('こんにちは');
 
 function preloadAssets(){
     
@@ -17,6 +18,7 @@ function preloadAssets(){
    button = new Button("dice","light",50,50);
    kuma = new Sprite(32,32);
    map = new Map(16, 16);
+   text = new Label();
    game.preload(
 		'images/chara1.png', 
 		'images/map0.png'
@@ -76,13 +78,15 @@ function init(){
     map.loadData(mapArray);
     game.rootScene.addChild(map);
     game.rootScene.addChild(kuma);
-    
+    game.rootScene.addChild(text);
     button.moveTo(400,100);
+    text.moveTo(0,250);
     t=1;
     if(t==1){
-    button.ontouchstart = but;
+	button.ontouchstart = but;
     }
     kuma.onenterframe= function(){
+
 	if(t!=1 && 0 < kuma.vx ){
 	    
 	    if(mapdirect[(kuma.y+8)/16][(kuma.x+8)/16]==0){
@@ -106,13 +110,14 @@ function init(){
 	    if(kuma.vx <= 0)
 		t=1;
 	}
+	text.text = "end";
     }
 }
 
 
 function but()
 {
-    
+
     if(t==1){
 	var r = Math.floor(Math.random() * 6) + 1;
 	kuma.vx = r;
