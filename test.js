@@ -83,11 +83,11 @@ function init(){
     button.ontouchstart = but;
     }
     kuma.onenterframe= function(){
-	if(t!=1 && 0<kuma.vx ){
+	if(t!=1 && 0 < kuma.vx ){
 	    
 	    if(mapdirect[(kuma.y+8)/16][(kuma.x+8)/16]==0){
-		kuma.y =kuma.y - 16;
-		kuma.vx --;
+		kuma.y = kuma.y - 16;
+		kuma.vx--;
 	    }
 	    if(mapdirect[(kuma.y+8)/16][(kuma.x+8)/16]==1){
 		kuma.x = kuma.x- 16;
@@ -103,7 +103,7 @@ function init(){
 	    }
 	    
 	    console.log(kuma.vx);	    
-	    if(kuma.vx<=0)
+	    if(kuma.vx <= 0)
 		t=1;
 	}
     }
