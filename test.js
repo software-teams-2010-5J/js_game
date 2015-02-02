@@ -10,7 +10,56 @@ var mapdirect;
 var WIDTH=480;
 var HEIGHT=320;
 var t;
-var text = new Label('こんにちは');
+
+var SPRITE_WIDTH  = 320;
+var SPRITE_HEIGHT = 280;
+var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
+var WINDOWS_LINE_COLOR = 'rgb(235, 140, 70)';
+var WINDOWS_LINE_COLOR_SHADE = "black";
+var WINDOW_COLOR = 'rgb(251, 215, 157)';
+
+/**
+ * メッセージ画面クラス
+ */
+BaseMessageWindow = Class.create(Sprite, {
+    initialize:function(width, height, x, y){
+        // 親クラス コンストラクタ
+        Sprite.call(this, width, height);
+
+        // デフォルト引数
+        if (x === undefined) x=0;
+        if (y === undefined) y=0;
+
+        // サーフェス生成
+	var surface = new Surface(width, height);
+
+        // 描画設定
+        surface.context.beginPath();
+        surface.context.rect(0, 0, width-1, height-1);
+        surface.context.fillStyle = "orange"; // 色指定
+        surface.context.shadowColor = WINDOWS_LINE_COLOR_SHADE;
+        surface.context.shadowBlur = 1;
+        surface.context.shadowOffsetX = 1;
+        surface.context.shadowOffsetY = 1;
+        surface.context.fill();     // 描画
+
+        surface.context.beginPath();
+        surface.context.rect(4, 4, width-7, height-7);
+        surface.context.fillStyle = WINDOW_COLOR; // 色指定
+        surface.context.shadowColor = WINDOWS_LINE_COLOR_SHADE;
+        surface.context.shadowBlur = 1;
+        surface.context.shadowOffsetX = -1;
+        surface.context.shadowOffsetY = -1;
+        surface.context.fill();     // 描画
+
+        // 表示位置設定
+        this.x = x;
+        this.y = y;
+        this.image = surface;
+
+        this.counter = 1;
+    }
+});
 
 function preloadAssets(){
     
@@ -18,7 +67,6 @@ function preloadAssets(){
    button = new Button("dice","light",50,50);
    kuma = new Sprite(32,32);
    map = new Map(16, 16);
-   text = new Label();
    game.preload(
 		'images/chara1.png', 
 		'images/map0.png'
@@ -78,9 +126,8 @@ function init(){
     map.loadData(mapArray);
     game.rootScene.addChild(map);
     game.rootScene.addChild(kuma);
-    game.rootScene.addChild(text);
+    game.rootScene.addChild(new BaseMessageWindow(300, 70, 10, 220));
     button.moveTo(400,100);
-    text.moveTo(0,250);
     t=1;
     if(t==1){
 	button.ontouchstart = but;
@@ -110,7 +157,6 @@ function init(){
 	    if(kuma.vx <= 0)
 		t=1;
 	}
-	text.text = "end";
     }
 }
 
