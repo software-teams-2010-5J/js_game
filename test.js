@@ -10,7 +10,8 @@ var mapdirect;
 var WIDTH=480;
 var HEIGHT=320;
 var t;
-
+var field;
+var msglabel;
 var SPRITE_WIDTH  = 320;
 var SPRITE_HEIGHT = 280;
 var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
@@ -67,6 +68,13 @@ function preloadAssets(){
    button = new Button("dice","light",50,50);
    kuma = new Sprite(32,32);
    map = new Map(16, 16);
+   field = new BaseMessageWindow(300, 70, 10, 220);
+   msglabel = new Label();
+   msglabel.font = "32px monospace";
+   msglabel.color = "#000000";
+   msglabel.text = "移動が終了しました";
+   msglabel.x = 22;
+   msglabel.y = 240;
    game.preload(
 		'images/chara1.png', 
 		'images/map0.png'
@@ -126,11 +134,13 @@ function init(){
     map.loadData(mapArray);
     game.rootScene.addChild(map);
     game.rootScene.addChild(kuma);
-    game.rootScene.addChild(new BaseMessageWindow(300, 70, 10, 220));
+
     button.moveTo(400,100);
     t=1;
     if(t==1){
+
 	button.ontouchstart = but;
+	
     }
     kuma.onenterframe= function(){
 
@@ -155,7 +165,11 @@ function init(){
 	    
 	    console.log(kuma.vx);	    
 	    if(kuma.vx <= 0)
+	    {
 		t=1;
+		game.rootScene.addChild(field);
+		game.rootScene.addChild(msglabel);
+	    }
 	}
     }
 }
@@ -163,7 +177,8 @@ function init(){
 
 function but()
 {
-
+    game.rootScene.removeChild(field);
+    game.rootScene.removeChild(msglabel);
     if(t==1){
 	var r = Math.floor(Math.random() * 6) + 1;
 	kuma.vx = r;
