@@ -11,7 +11,8 @@ var WIDTH=480;
 var HEIGHT=320;
 var t;
 var field;
-var msglabel;
+var msglabel = [];
+var use_massage;
 var SPRITE_WIDTH  = 320;
 var SPRITE_HEIGHT = 280;
 var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
@@ -69,13 +70,20 @@ function preloadAssets(){
    kuma = new Sprite(32,32);
    map = new Map(16, 16);
    field = new BaseMessageWindow(300, 70, 10, 220);
-   msglabel = new Label();
-   msglabel.font = "32px monospace";
-   msglabel.color = "#000000";
-   msglabel.text = "移動が終了しました";
-   msglabel.x = 22;
-   msglabel.y = 240;
-   game.preload(
+   msglabel[0] = new Label();
+   msglabel[0].font = "32px monospace";
+   msglabel[0].color = "#000000";
+   msglabel[0].text = "移動が終了しました A";
+   msglabel[0].x = 22;
+   msglabel[0].y = 240;
+   msglabel[1] = new Label();
+   msglabel[1].font = "32px monospace";
+   msglabel[1].color = "#000000";
+   msglabel[1].text = "移動が終了しました B";
+   msglabel[1].x = 22;
+   msglabel[1].y = 240;
+
+    game.preload(
 		'images/chara1.png', 
 		'images/map0.png'
 		);   
@@ -169,7 +177,14 @@ function init(){
 	    {
 		t=1;
 		game.rootScene.addChild(field);
-		game.rootScene.addChild(msglabel);
+		if(((kuma.x - 8) / 16) % 2)
+		{
+		    use_massage = msglabel[0];
+		}else{
+		    use_massage = msglabel[1];
+		}
+		console.log(kuma.x);
+		game.rootScene.addChild(use_massage);
 	    }
 	}
     }
@@ -179,7 +194,7 @@ function init(){
 function but()
 {
     game.rootScene.removeChild(field);
-    game.rootScene.removeChild(msglabel);
+    game.rootScene.removeChild(use_massage);
     if(t==1){
 	var r = Math.floor(Math.random() * 6) + 1;
 	kuma.vx = r;
