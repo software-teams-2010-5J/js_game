@@ -77,13 +77,13 @@ function preloadAssets(){
    msglabel[0] = new Label();
    msglabel[0].font = "32px monospace";
    msglabel[0].color = "#000000";
-   msglabel[0].text = "移動が終了しました A";
+   msglabel[0].text = "移動が終了しましたえ";
    msglabel[0].x = 22;
    msglabel[0].y = 240;
    msglabel[1] = new Label();
    msglabel[1].font = "32px monospace";
    msglabel[1].color = "#000000";
-   msglabel[1].text = "移動が終了しました B";
+   msglabel[1].text = "移動が終了しましたび";
    msglabel[1].x = 22;
    msglabel[1].y = 240;
 
