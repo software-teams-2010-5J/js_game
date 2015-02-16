@@ -26,6 +26,8 @@ var MESSAGE_WINDOW_POSITION_Y = 220;
 
 /**
  * メッセージ画面クラス
+ 使い方：use_messageに使いたい文言を追加する。
+ addchildして、表示を消すタイミングでremovechildする。
  */
 BaseMessageWindow = Class.create(Sprite, {
     initialize:function(width, height, x, y){
