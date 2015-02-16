@@ -91,7 +91,9 @@ function init(){
     t=1;
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['images/map0.png'];
-    
+    var file = fs.OpenTextFile("map.txt",1);
+
+
     kuma.x = 8;
     kuma.y = 8;
     kuma.i =26;
