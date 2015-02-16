@@ -12,7 +12,7 @@ var HEIGHT=320;
 var t;
 var field;
 var msglabel = [];
-var use_massage;
+var use_message;
 var SPRITE_WIDTH  = 320;
 var SPRITE_HEIGHT = 280;
 var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
@@ -69,7 +69,7 @@ function preloadAssets(){
    button = new Button("dice","light",50,50);
    kuma = new Sprite(32,32);
    map = new Map(16, 16);
-   field = new BaseMessageWindow(300, 70, 10, 220);
+   field = new BaseMessageWindow(350, 70, 10, 220);
    msglabel[0] = new Label();
    msglabel[0].font = "32px monospace";
    msglabel[0].color = "#000000";
@@ -179,12 +179,12 @@ function init(){
 		game.rootScene.addChild(field);
 		if(((kuma.x - 8) / 16) % 2)
 		{
-		    use_massage = msglabel[0];
+		    use_message = msglabel[0];
 		}else{
-		    use_massage = msglabel[1];
+		    use_message = msglabel[1];
 		}
 		console.log(kuma.x);
-		game.rootScene.addChild(use_massage);
+		game.rootScene.addChild(use_message);
 	    }
 	}
     }
@@ -194,7 +194,7 @@ function init(){
 function but()
 {
     game.rootScene.removeChild(field);
-    game.rootScene.removeChild(use_massage);
+    game.rootScene.removeChild(use_message);
     if(t==1){
 	var r = Math.floor(Math.random() * 6) + 1;
 	kuma.vx = r;
