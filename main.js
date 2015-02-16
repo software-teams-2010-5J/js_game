@@ -19,6 +19,10 @@ var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
 var WINDOWS_LINE_COLOR = 'rgb(235, 140, 70)';
 var WINDOWS_LINE_COLOR_SHADE = "black";
 var WINDOW_COLOR = 'rgb(251, 215, 157)';
+var MESSAGE_WINDOW_SIZE_X = 350;
+var MESSAGE_WINDOW_SIZE_Y = 70;
+var MESSAGE_WINDOW_POSITION_X = 10;
+var MESSAGE_WINDOW_POSITION_Y = 220;
 
 /**
  * メッセージ画面クラス
@@ -69,7 +73,7 @@ function preloadAssets(){
    button = new Button("dice","light",50,50);
    kuma = new Sprite(32,32);
    map = new Map(16, 16);
-   field = new BaseMessageWindow(350, 70, 10, 220);
+   field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
    msglabel[0] = new Label();
    msglabel[0].font = "32px monospace";
    msglabel[0].color = "#000000";
