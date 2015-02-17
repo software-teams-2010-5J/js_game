@@ -4,16 +4,13 @@
 </form>
 
 <script>
-var fs = WScript.CreateObject("Scripting.FileSystemObject");
-var obj1 = document.getElementById("selfile");
-var file=fs.OpenTextFile("map.txt",1);
-var str = file.ReadLine();
-console.log(str);
-//ダイアログでファイルが選択された時
-obj1.addEventListener("change",function(evt){
-
+  
+  var obj1 = document.getElementById("selfile");
+  //ダイアログでファイルが選択された時
+  obj1.addEventListener("change",function(evt){
+  
   var file = evt.target.files;
-
+  
   //FileReaderの作成
   var reader = new FileReader();
   //テキスト形式で読み込む
@@ -21,8 +18,9 @@ obj1.addEventListener("change",function(evt){
   
   //読込終了後の処理
   reader.onload = function(ev){
-    //テキストエリアに表示する
-    document.test.txt.value = reader.result;
+  //テキストエリアに表示する
+  console.log(reader.result[301]);
+  document.test.txt.value = reader.result;
   }
-},false);
+  },false);
 </script>
