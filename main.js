@@ -1,6 +1,7 @@
 enchant();
 window.onload = preloadAssets;
 
+var title;
 var scene;
 var game;
 var button;
@@ -25,7 +26,7 @@ var MESSAGE_WINDOW_SIZE_X = 350;
 var MESSAGE_WINDOW_SIZE_Y = 70;
 var MESSAGE_WINDOW_POSITION_X = 10;
 var MESSAGE_WINDOW_POSITION_Y = 220;
-
+var button_t;
 /**
  * メッセージ画面クラス
  使い方：use_messageに使いたい文言を追加する。
@@ -78,6 +79,30 @@ function preloadAssets(){
    kuma = new Sprite(32,32);
    map = new Map(48, 48);
    field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
+   title = new Scene();
+   title.backgroundColor = "brown";
+
+   var mytheme = {
+       normal : { 
+	   color : '#00F',
+	   background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
+	   border: { color: '#f99', width: 1, type: 'solid' },
+	   textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	   boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+       },
+       active : { 
+	   color : '#00F',
+	   background: { type: 'linear-gradient', start: '#fee', end: '#fd6' },
+	   border: { color: '#fbb', width: 1, type: 'solid' },
+	   textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	   boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+       }
+   }
+   button_t = new Button("モノポリ　スタート",mytheme,320,320);
+   button_t.font = '60px serif';
+   button_t.moveTo(300,200);
+   title.addChild(button_t);
+
    var second = new Scene();
    var third = new Scene();
    msglabel[0] = new Label();
@@ -103,6 +128,7 @@ function preloadAssets(){
     game.onload = init;
     
     second.backgroundColor = "red";
+    
     game.start();
 
 
@@ -115,20 +141,26 @@ var posy;
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['489.png'];
 
+    
+
     map_init();
-    // read file functiom 
     kuma_init();
+
     game.rootScene.addChild(button);
     game.rootScene.addChild(kuma);
-
+    
     map.loadData(mapArray);
     game.rootScene.addChild(map);
     game.rootScene.addChild(kuma);
-
+    
     button.moveTo(400,400);
-
-    button.ontouchstart = but
-    kuma.onenterframe= kuma_mov
+    
+    button.ontouchstart = but;
+    kuma.onenterframe= kuma_mov;
+    game.pushScene(title);
+    button_t.addEventListener("touchend", function(e) { game.popScene(); });
+	
+   
 }
 function kuma_mov(){
     
