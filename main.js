@@ -6,10 +6,11 @@ var game;
 var button;
 var kuma;
 var map;
+var mapArray;
 var mapdirect;
-var WIDTH=480;
-var HEIGHT=320;
-var t;
+var WIDTH=960;
+var HEIGHT=960;
+var t=1;
 var field;
 var msglabel = [];
 var use_message;
@@ -19,6 +20,7 @@ var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
 var WINDOWS_LINE_COLOR = 'rgb(235, 140, 70)';
 var WINDOWS_LINE_COLOR_SHADE = "black";
 var WINDOW_COLOR = 'rgb(251, 215, 157)';
+var MAP_NUM = 10;
 var MESSAGE_WINDOW_SIZE_X = 350;
 var MESSAGE_WINDOW_SIZE_Y = 70;
 var MESSAGE_WINDOW_POSITION_X = 10;
@@ -74,8 +76,10 @@ function preloadAssets(){
    game = new Game(WIDTH,HEIGHT);
    button = new Button("dice","light",50,50);
    kuma = new Sprite(32,32);
-   map = new Map(16, 16);
+   map = new Map(48, 48);
    field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
+   var second = new Scene();
+   var third = new Scene();
    msglabel[0] = new Label();
    msglabel[0].font = "32px monospace";
    msglabel[0].color = "#000000";
@@ -91,95 +95,64 @@ function preloadAssets(){
 
     game.preload(
 		'images/chara1.png', 
-		'images/map0.png'
+		'489.png'
 		);   
     
     game.rootScene.backgroundColor = "blue";    
     game.fps = 30;
     game.onload = init;
+    
+    second.backgroundColor = "red";
     game.start();
+
+
 }
 
 function init(){
-    
+var posx;
+var posy;
     t=1;
     kuma.image = game.assets['images/chara1.png'];
-    map.image = game.assets['images/map0.png'];
-    //var file = fs.OpenTextFile("map.txt",1);
+    map.image = game.assets['489.png'];
 
-    kuma.x = 8;
-    kuma.y = 8;
-    kuma.i =26;
-    kuma.scaleX = 0.7;
-    kuma.scaleY = 0.7;
-   
+    map_init();
+    // read file functiom 
+    kuma_init();
     game.rootScene.addChild(button);
     game.rootScene.addChild(kuma);
-    var mapArray = [
-		    [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		    [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-		    ];
-    
-    mapdirect =  [
-		  [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-		  [4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,4],
-		  [4,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,4],
-		  [4,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,4],
-		  [4,0,5,5,5,2,1,1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,4],
-		  [4,0,5,5,5,2,5,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,4],
-		  [4,0,5,5,5,2,5,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,4],
-		  [4,0,1,1,1,2,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4],
-		  [4,0,5,5,5,2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		  [4,0,5,5,5,2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		  [4,0,5,5,5,2,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		  [4,0,1,1,1,1,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4],
-		  [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-		  ];
+
     map.loadData(mapArray);
     game.rootScene.addChild(map);
     game.rootScene.addChild(kuma);
 
-    button.moveTo(400,100);
-    t=1;
-    if(t==1){
+    button.moveTo(400,400);
 
-	button.ontouchstart = but;
+    button.ontouchstart = but
+    kuma.onenterframe= kuma_mov
+}
+function kuma_mov(){
+    
+    if(t!=1 && 0 < kuma.vx ){
+	posx = (kuma.x-8)/48;
+	posy = (kuma.y-8)/48;
 	
-    }
-    kuma.onenterframe= function(){
-
-	if(t!=1 && 0 < kuma.vx ){
-	    
-	    if(mapdirect[(kuma.y+8)/16][(kuma.x+8)/16]==0){
-		kuma.y = kuma.y - 16;
-		kuma.vx--;
-	    }
-	    if(mapdirect[(kuma.y+8)/16][(kuma.x+8)/16]==1){
-		kuma.x = kuma.x- 16;
-		kuma.vx--;
-	    }
-	    if(mapdirect[(kuma.y+8)/16][(kuma.x+8)/16]==2){
-		kuma.y = kuma.y+ 16;
-		kuma.vx--;
-	    }
-	    if(mapdirect[(kuma.y+8)/16][(kuma.x+8)/16]==3){
-		kuma.x = kuma.x+ 16;
-		kuma.vx--;
-	    }
-	    
-	    console.log(kuma.vx);	    
-	    if(kuma.vx <= 0)
+	if(mapdirect[posy][posx]==0){
+	    kuma.y = kuma.y - 48;
+	    kuma.vx--;
+	}
+	else if(mapdirect[posy][posx]==1){
+	    kuma.x = kuma.x- 48;
+	    kuma.vx--;
+	}
+	else if(mapdirect[posy][posx]==2){
+	    kuma.y = kuma.y+ 48;
+	    kuma.vx--;
+	}
+	else if(mapdirect[posy][posx]==3){
+	    kuma.x = kuma.x+ 48;
+	    kuma.vx--;
+	}	   
+	if(kuma.vx <= 0)
 	    {
 		t=1;
 		game.rootScene.addChild(field);
@@ -192,11 +165,48 @@ function init(){
 		console.log(kuma.x);
 		game.rootScene.addChild(use_message);
 	    }
-	}
     }
 }
+function map_init(){
+    
+    mapArray = [
+		[,,,,,,,,,,,,],
+		[,0,0,0,0,0,0,0,0,0,0,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,0,0,0,0,0,0,0,0,0,0,4],
+		//	[,4,4,4,4,4,4,4,4,4,4,4,4],
+		];
+    mapdirect = [
+		 [4,4,4,4,4,4,4,4,4,4,4,4,4],
+		 [4,3,3,3,3,3,3,3,3,3,3,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,4,4,4,4,4,4,4,4,4,2,4],
+		 [4,0,1,1,1,1,1,1,1,1,1,1,4],
+		 [4,4,4,4,4,4,4,4,4,4,4,4,4],
+		 ];
+}
 
-
+function kuma_init(){
+    kuma.x = 48*1+8;
+    kuma.y = 48*1+8;
+    kuma.scaleX = 0.9;
+    kuma.scaleY = 0.8;
+}
 function but()
 {
     game.rootScene.removeChild(field);
@@ -205,7 +215,7 @@ function but()
 	var r = Math.floor(Math.random() * 6) + 1;
 	kuma.vx = r;
 	this.text = "dice:+"+r;
-	console.log("kuma.vx jus = "+kuma.vx);
+	console.log("kuma.vx = "+kuma.vx);
 	t=0;
     }
 }
