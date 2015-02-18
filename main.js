@@ -20,8 +20,7 @@ var WINDOWS_LINE_COLOR = 'rgb(235, 140, 70)';
 var WINDOWS_LINE_COLOR_SHADE = "black";
 var WINDOW_COLOR = 'rgb(251, 215, 157)';
 var MAP_NUM = 10;
-var posx;
-var posy;
+
 /**
  * メッセージ画面クラス
  */
@@ -73,6 +72,8 @@ function preloadAssets(){
    map = new Map(48, 48);
    field = new BaseMessageWindow(300, 70, 10, 220);
    msglabel = new Label();
+   var second = new Scene();
+   var third = new Scene();
    msglabel.font = "32px monospace";
    msglabel.color = "#000000";
    msglabel.text = "移動が終了しました";
@@ -86,11 +87,16 @@ function preloadAssets(){
     game.rootScene.backgroundColor = "blue";    
     game.fps = 30;
     game.onload = init;
+    
+    second.backgroundColor = "red";
     game.start();
+
+
 }
 
 function init(){
-
+var posx;
+var posy;
     t=1;
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['489.png'];
@@ -107,61 +113,55 @@ function init(){
 
     button.moveTo(400,400);
 
-    //    if(t==1){
+    button.ontouchstart = but
+    kuma.onenterframe= kuma_mov
+}
+function kuma_mov(){
     
-    button.ontouchstart = but;
-    
-    // }
-    kuma.onenterframe= function(){
+    if(t!=1 && 0 < kuma.vx ){
+	posx = (kuma.x-8)/48;
+	posy = (kuma.y-8)/48;
 	
-	if(t!=1 && 0 < kuma.vx ){
-	    posx = (kuma.x-8)/48;
-	    posy = (kuma.y-8)/48;
-	   
-	    if(mapdirect[posy][posx]==0){
-		kuma.y = kuma.y - 48;
-		kuma.vx--;
-	    }
-	    else if(mapdirect[posy][posx]==1){
-		kuma.x = kuma.x- 48;
-		kuma.vx--;
-	    }
-	    else if(mapdirect[posy][posx]==2){
-		kuma.y = kuma.y+ 48;
-		kuma.vx--;
-	    }
-	    else if(mapdirect[posy][posx]==3){
-		kuma.x = kuma.x+ 48;
-		kuma.vx--;
-	    }
-
-	    
-	   
-	    if(kuma.vx <= 0)
-		{
-		    t=1;
-		    game.rootScene.addChild(field);
-		    game.rootScene.addChild(msglabel);
-		}
+	if(mapdirect[posy][posx]==0){
+	    kuma.y = kuma.y - 48;
+	    kuma.vx--;
 	}
+	else if(mapdirect[posy][posx]==1){
+	    kuma.x = kuma.x- 48;
+	    kuma.vx--;
+	}
+	else if(mapdirect[posy][posx]==2){
+	    kuma.y = kuma.y+ 48;
+	    kuma.vx--;
+	}
+	else if(mapdirect[posy][posx]==3){
+	    kuma.x = kuma.x+ 48;
+	    kuma.vx--;
+	}	   
+	if(kuma.vx <= 0)
+	    {
+		t=1;
+		game.rootScene.addChild(field);
+		game.rootScene.addChild(msglabel);
+	    }
     }
 }
 function map_init(){
-
+    
     mapArray = [
-		[4,4,4,4,4,4,4,4,4,4,4,4,4],
-		[4,0,0,0,0,0,0,0,0,0,0,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,3,3,3,3,3,3,3,3,3,0,4],
-		[4,0,0,0,0,0,0,0,0,0,0,0,4],
-		[4,4,4,4,4,4,4,4,4,4,4,4,4],
+		[,,,,,,,,,,,,],
+		[,0,0,0,0,0,0,0,0,0,0,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,3,3,3,3,3,3,3,3,3,0,4],
+		[,0,0,0,0,0,0,0,0,0,0,0,4],
+		//	[,4,4,4,4,4,4,4,4,4,4,4,4],
 		];
     mapdirect = [
 		 [4,4,4,4,4,4,4,4,4,4,4,4,4],
