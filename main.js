@@ -12,7 +12,8 @@ var WIDTH=960;
 var HEIGHT=960;
 var t=1;
 var field;
-var msglabel;
+var msglabel = [];
+var use_message;
 var SPRITE_WIDTH  = 320;
 var SPRITE_HEIGHT = 280;
 var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
@@ -20,9 +21,15 @@ var WINDOWS_LINE_COLOR = 'rgb(235, 140, 70)';
 var WINDOWS_LINE_COLOR_SHADE = "black";
 var WINDOW_COLOR = 'rgb(251, 215, 157)';
 var MAP_NUM = 10;
+var MESSAGE_WINDOW_SIZE_X = 350;
+var MESSAGE_WINDOW_SIZE_Y = 70;
+var MESSAGE_WINDOW_POSITION_X = 10;
+var MESSAGE_WINDOW_POSITION_Y = 220;
 
 /**
  * メッセージ画面クラス
+ 使い方：use_messageに使いたい文言を追加する。
+ addchildして、表示を消すタイミングでremovechildする。
  */
 BaseMessageWindow = Class.create(Sprite, {
     initialize:function(width, height, x, y){
@@ -70,16 +77,23 @@ function preloadAssets(){
    button = new Button("dice","light",50,50);
    kuma = new Sprite(32,32);
    map = new Map(48, 48);
-   field = new BaseMessageWindow(300, 70, 10, 220);
-   msglabel = new Label();
+   field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
    var second = new Scene();
    var third = new Scene();
-   msglabel.font = "32px monospace";
-   msglabel.color = "#000000";
-   msglabel.text = "移動が終了しました";
-   msglabel.x = 22;
-   msglabel.y = 240;
-   game.preload(
+   msglabel[0] = new Label();
+   msglabel[0].font = "32px monospace";
+   msglabel[0].color = "#000000";
+   msglabel[0].text = "移動が終了しましたえ";
+   msglabel[0].x = 22;
+   msglabel[0].y = 240;
+   msglabel[1] = new Label();
+   msglabel[1].font = "32px monospace";
+   msglabel[1].color = "#000000";
+   msglabel[1].text = "移動が終了しましたび";
+   msglabel[1].x = 22;
+   msglabel[1].y = 240;
+
+    game.preload(
 		'images/chara1.png', 
 		'489.png'
 		);   
@@ -142,7 +156,14 @@ function kuma_mov(){
 	    {
 		t=1;
 		game.rootScene.addChild(field);
-		game.rootScene.addChild(msglabel);
+		if(((kuma.x - 8) / 16) % 2)
+		{
+		    use_message = msglabel[0];
+		}else{
+		    use_message = msglabel[1];
+		}
+		console.log(kuma.x);
+		game.rootScene.addChild(use_message);
 	    }
     }
 }
@@ -189,7 +210,7 @@ function kuma_init(){
 function but()
 {
     game.rootScene.removeChild(field);
-    game.rootScene.removeChild(msglabel);
+    game.rootScene.removeChild(use_message);
     if(t==1){
 	var r = Math.floor(Math.random() * 6) + 1;
 	kuma.vx = r;
