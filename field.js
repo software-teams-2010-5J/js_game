@@ -257,4 +257,4 @@ field[39]{
     value: 400,
     group_id: 7,
     effect_id: 0,
-}
+};
