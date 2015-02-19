@@ -73,55 +73,54 @@ BaseMessageWindow = Class.create(Sprite, {
 });
 
 function preloadAssets(){
+    game = new Game(WIDTH,HEIGHT);
+    button = new Button("dice","light",50,50);
+    kuma = new Sprite(32,32);
+    map = new Map(48, 48);
+    field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
+    title = new Scene();
+    title.backgroundColor = "brown";
     
-   game = new Game(WIDTH,HEIGHT);
-   button = new Button("dice","light",50,50);
-   kuma = new Sprite(32,32);
-   map = new Map(48, 48);
-   field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
-   title = new Scene();
-   title.backgroundColor = "brown";
-
-   var mytheme = {
-       normal : { 
-	   color : '#00F',
-	   background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
-	   border: { color: '#f99', width: 1, type: 'solid' },
-	   textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
-	   boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
-       },
-       active : { 
-	   color : '#00F',
-	   background: { type: 'linear-gradient', start: '#fee', end: '#fd6' },
-	   border: { color: '#fbb', width: 1, type: 'solid' },
-	   textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
-	   boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+    var mytheme = {
+	normal : { 
+	    color : '#00F',
+	    background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
+	    border: { color: '#f99', width: 1, type: 'solid' },
+	    textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	    boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+	},
+	active : { 
+	    color : '#00F',
+	    background: { type: 'linear-gradient', start: '#fee', end: '#fd6' },
+	    border: { color: '#fbb', width: 1, type: 'solid' },
+	    textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	    boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
        }
-   }
-   button_t = new Button("モノポリ　スタート",mytheme,320,320);
-   button_t.font = '60px serif';
-   button_t.moveTo(300,200);
-   title.addChild(button_t);
-
-   var second = new Scene();
-   var third = new Scene();
-   msglabel[0] = new Label();
-   msglabel[0].font = "32px monospace";
-   msglabel[0].color = "#000000";
-   msglabel[0].text = "移動が終了しましたえ";
-   msglabel[0].x = 22;
-   msglabel[0].y = 240;
-   msglabel[1] = new Label();
-   msglabel[1].font = "32px monospace";
-   msglabel[1].color = "#000000";
-   msglabel[1].text = "移動が終了しましたび";
-   msglabel[1].x = 22;
-   msglabel[1].y = 240;
-
+    }
+    button_t = new Button("モノポリ　スタート",mytheme,320,320);
+    button_t.font = '60px serif';
+    button_t.moveTo(300,200);
+    title.addChild(button_t);
+    
+    var second = new Scene();
+    var third = new Scene();
+    msglabel[0] = new Label();
+    msglabel[0].font = "32px monospace";
+    msglabel[0].color = "#000000";
+    msglabel[0].text = "移動が終了しましたえ";
+    msglabel[0].x = 22;
+    msglabel[0].y = 240;
+    msglabel[1] = new Label();
+    msglabel[1].font = "32px monospace";
+    msglabel[1].color = "#000000";
+    msglabel[1].text = "移動が終了しましたび";
+    msglabel[1].x = 22;
+    msglabel[1].y = 240;
+    
     game.preload(
-		'images/chara1.png', 
-		'489.png'
-		);   
+		 'images/chara1.png', 
+		 '489.png'
+		 );   
     
     game.rootScene.backgroundColor = "blue";    
     game.fps = 30;
@@ -130,8 +129,8 @@ function preloadAssets(){
     second.backgroundColor = "red";
     
     game.start();
-
-
+    
+    
 }
 
 function init(){
