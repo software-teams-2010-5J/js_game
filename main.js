@@ -134,12 +134,20 @@ function preloadAssets(){
 }
 var i;
 function init(){
-for(i = 0;i < 40;i++)
-{
-    console.log(field[i].name);
-}
-var posx;
-var posy;
+    for(i = 0;i < 40;i++)
+    {
+	console.log(field[i].name);
+    }
+    player[0] = Player("Akira0");
+    player[1] = Player("Akira1");
+    player[2] = Player("Akira2");
+    player[3] = Player("Akira3");
+    for(i = 0;i < 4;i++)
+    {
+	console.log(player[i].name);
+    }
+    var posx;
+    var posy;
     t=1;
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['444.png'];
