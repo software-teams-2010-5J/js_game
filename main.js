@@ -1,6 +1,5 @@
 window.onload = preloadAssets;
 
-
 var title;
 var map_scene;
 var dice_scene;
@@ -14,8 +13,6 @@ var mapArray;
 var mapdirect;
 var WIDTH=960;
 var HEIGHT=720;
-
-v
 
 var t=1;
 var message_field;
@@ -96,8 +93,6 @@ function init(){
     t=1;
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['444.png'];
-
-    
 
     map_init();
     kuma_init();
@@ -181,8 +176,8 @@ function kuma_mov(){
 }
 
 function kuma_init(){
-    kuma.x = 48*1+8;
-    kuma.y = 48*1+8;
+    kuma.x = 48*11+8;
+    kuma.y = 48*11+8;
     kuma.scaleX = 0.9;
     kuma.scaleY = 0.8;
 }
@@ -196,7 +191,11 @@ function but()
 	kuma.v =2;
 	kuma.vx = r;
 	this.text = "dice:+"+r;
+	player[0].point += r;
+	if(r >= 40)
+	    player[0].point = 40 - player[0].point;
 	console.log("kuma.vx = "+kuma.vx);
+	console.log("nowpointname = "+field[player[0].point].name);
 	t=0;
     }
 }
