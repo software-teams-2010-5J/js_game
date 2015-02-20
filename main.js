@@ -132,15 +132,17 @@ function preloadAssets(){
     
     
 }
-
+var i;
 function init(){
+for(i = 0;i < 40;i++)
+{
+    console.log(field[i].name);
+}
 var posx;
 var posy;
     t=1;
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['489.png'];
-
-    
 
     map_init();
     kuma_init();
