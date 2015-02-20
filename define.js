@@ -1,18 +1,24 @@
+enchant();
+
 //ゲームウインドウサイズ
 var WIDTH = 960;
 var HEIGHT = 720;
 
 //メッセージウインドウサイズ
-var MESSAGE_WINDOW_SIZE_X = 350;
+var MESSAGE_WINDOW_SIZE_X = 500;
 var MESSAGE_WINDOW_SIZE_Y = 70;
-var MESSAGE_WINDOW_POSITION_X = 10;
-var MESSAGE_WINDOW_POSITION_Y = 220;
+var MESSAGE_WINDOW_POSITION_X = 50;
+var MESSAGE_WINDOW_POSITION_Y = 600;
 
 //メッセージウインドウ関連オプション
 var BACKGROUND_COLOR = 'rgb(185, 130, 190)';
 var WINDOWS_LINE_COLOR = 'rgb(235, 140, 70)';
 var WINDOWS_LINE_COLOR_SHADE = "black";
 var WINDOW_COLOR = 'rgb(251, 215, 157)';
+
+//メッセージ位置用マージン
+var MESSAGE_MARGIN_X = 10;
+var MESSAGE_MARGIN_Y = 15;
 
 /* メッセージ画面クラス
  使い方：use_messageに使いたい文言を追加する。
@@ -92,3 +98,18 @@ function map_init(){
 	[4,4,4,4,4,4,4,4,4,4,4,4,4],
     ];
 }
+
+//テスト文字列
+var msglabel = [];
+msglabel[0] = new Label();
+msglabel[0].font = "32px monospace";
+msglabel[0].color = "#000000";
+msglabel[0].text = "移動が終了しましたえ";
+msglabel[0].x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
+msglabel[0].y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
+msglabel[1] = new Label();
+msglabel[1].font = "32px monospace";
+msglabel[1].color = "#000000";
+msglabel[1].text = "移動が終了しましたび";
+msglabel[1].x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
+msglabel[1].y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
