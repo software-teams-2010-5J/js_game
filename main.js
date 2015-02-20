@@ -12,7 +12,7 @@ var mapdirect;
 var WIDTH=960;
 var HEIGHT=960;
 var t=1;
-var field;
+var message_field;
 var msglabel = [];
 var use_message;
 var SPRITE_WIDTH  = 320;
@@ -49,7 +49,7 @@ BaseMessageWindow = Class.create(Sprite, {
         surface.context.rect(0, 0, width-1, height-1);
         surface.context.fillStyle = "orange"; // 色指定
         surface.context.shadowColor = WINDOWS_LINE_COLOR_SHADE;
-        surface.context.shadowBlur = 1;
+	surface.context.shadowBlur = 1;
         surface.context.shadowOffsetX = 1;
         surface.context.shadowOffsetY = 1;
         surface.context.fill();     // 描画
@@ -77,7 +77,7 @@ function preloadAssets(){
     button = new Button("dice","light",50,50);
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
-    field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
+    message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     title = new Scene();
     title.backgroundColor = "brown";
     
@@ -186,7 +186,7 @@ function kuma_mov(){
 	if(kuma.vx <= 0)
 	    {
 		t=1;
-		game.rootScene.addChild(field);
+		game.rootScene.addChild(message_field);
 		if(((kuma.x - 8) / 16) % 2)
 		{
 		    use_message = msglabel[0];
@@ -240,7 +240,7 @@ function kuma_init(){
 }
 function but()
 {
-    game.rootScene.removeChild(field);
+    game.rootScene.removeChild(message_field);
     game.rootScene.removeChild(use_message);
     if(t==1){
 	var r = Math.floor(Math.random() * 6) + 1;
