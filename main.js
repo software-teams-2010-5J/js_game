@@ -170,12 +170,7 @@ function kuma_mov(){
 			game.pushScene(map_scene);
 		    }
 		game.rootScene.addChild(message_field);
-		if(((kuma.x - 8) / 16) % 2)
-		{
-		    use_message = msglabel[0];
-		}else{
-		    use_message = msglabel[1];
-		}
+		use_message = msglabel;
 		console.log(kuma.x);
 		game.rootScene.addChild(use_message);
 	    }
@@ -199,10 +194,12 @@ function but()
 	kuma.vx = r;
 	this.text = "dice:+"+r;
 	player[0].point += r;
-	if(r >= 40)
-	    player[0].point = 40 - player[0].point;
+	if(player[0].point >= 40)
+	{
+	    player[0].point = player[0].point - 40;
+	}
+	msglabel.text = field[player[0].point].name;
 	console.log("kuma.vx = "+kuma.vx);
-	console.log("nowpointname = "+field[player[0].point].name);
 	t=0;
     }
 }

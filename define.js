@@ -100,16 +100,10 @@ function map_init(){
 }
 
 //テスト文字列
-var msglabel = [];
-msglabel[0] = new Label();
-msglabel[0].font = "32px monospace";
-msglabel[0].color = "#000000";
-msglabel[0].text = "移動が終了しましたえ";
-msglabel[0].x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
-msglabel[0].y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
-msglabel[1] = new Label();
-msglabel[1].font = "32px monospace";
-msglabel[1].color = "#000000";
-msglabel[1].text = "移動が終了しましたび";
-msglabel[1].x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
-msglabel[1].y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
+var msglabel;
+msglabel = new Label();
+msglabel.font = "32px monospace";
+msglabel.color = "#000000";
+msglabel.text = "移動が終了しましたえ";
+msglabel.x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
+msglabel.y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
