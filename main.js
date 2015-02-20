@@ -138,10 +138,10 @@ function init(){
     {
 	console.log(field[i].name);
     }
-    player[0] = Player("Akira0");
-    player[1] = Player("Akira1");
-    player[2] = Player("Akira2");
-    player[3] = Player("Akira3");
+    player[0] = new Player("Akira0");
+    player[1] = new Player("Akira1");
+    player[2] = new Player("Akira2");
+    player[3] = new Player("Akira3");
     for(i = 0;i < 4;i++)
     {
 	console.log(player[i].name);

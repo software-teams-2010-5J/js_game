@@ -1,10 +1,9 @@
+var START_MONEY = 800;
+var FIRST_POSITON = {x: 8,y: 8};
 var player = [];
-var Player = function(name){
-    this.name = name;
+var Player = function(input_name){
+    this.name = input_name;
     this.money = START_MONEY;
-    this.potition = {
-	x: FIRST_POSITON_X,
-	y: FIRST_POSITON_Y;
-    };
+    this.potition = FIRST_POSITON;
 };
     
