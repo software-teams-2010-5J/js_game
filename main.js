@@ -1,4 +1,3 @@
-enchant();
 window.onload = preloadAssets;
 
 var title;
@@ -11,7 +10,7 @@ var mapArray;
 var mapdirect;
 var t=1;
 var message_field;
-var msglabel = [];
+
 var use_message;
 var SPRITE_WIDTH  = 320;
 var SPRITE_HEIGHT = 280;
@@ -51,19 +50,6 @@ function preloadAssets(){
     var second = new Scene();
     var third = new Scene();
 
-    //テスト文字列
-    msglabel[0] = new Label();
-    msglabel[0].font = "32px monospace";
-    msglabel[0].color = "#000000";
-    msglabel[0].text = "移動が終了しましたえ";
-    msglabel[0].x = 22;
-    msglabel[0].y = 240;
-    msglabel[1] = new Label();
-    msglabel[1].font = "32px monospace";
-    msglabel[1].color = "#000000";
-    msglabel[1].text = "移動が終了しましたび";
-    msglabel[1].x = 22;
-    msglabel[1].y = 240;
     
     game.preload(
 		 'images/chara1.png', 
