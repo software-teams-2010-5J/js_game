@@ -1,16 +1,20 @@
 enchant();
 window.onload = preloadAssets;
 
+
 var title;
+var map_scene;
+var dice_scene;
 var scene;
 var game;
 var button;
 var kuma;
+
 var map;
 var mapArray;
 var mapdirect;
 var WIDTH=960;
-var HEIGHT=960;
+var HEIGHT=720;
 var t=1;
 var message_field;
 var msglabel = [];
@@ -27,6 +31,8 @@ var MESSAGE_WINDOW_SIZE_Y = 70;
 var MESSAGE_WINDOW_POSITION_X = 10;
 var MESSAGE_WINDOW_POSITION_Y = 220;
 var button_t;
+//var pink;
+
 /**
  * メッセージ画面クラス
  使い方：use_messageに使いたい文言を追加する。
@@ -78,10 +84,11 @@ function preloadAssets(){
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
-    title = new Scene();
-    title.backgroundColor = "brown";
     
-    var mytheme = {
+    dice_scene = new Scene();
+   
+    
+    mytheme = {
 	normal : { 
 	    color : '#00F',
 	    background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
@@ -95,15 +102,14 @@ function preloadAssets(){
 	    border: { color: '#fbb', width: 1, type: 'solid' },
 	    textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
 	    boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
-       }
+	}
     }
-    button_t = new Button("モノポリ　スタート",mytheme,320,320);
-    button_t.font = '60px serif';
-    button_t.moveTo(300,200);
-    title.addChild(button_t);
+   
     
+   
     var second = new Scene();
     var third = new Scene();
+    
     msglabel[0] = new Label();
     msglabel[0].font = "32px monospace";
     msglabel[0].color = "#000000";
@@ -118,6 +124,7 @@ function preloadAssets(){
     msglabel[1].y = 240;
     
     game.preload(
+		 '960.png',
 		 'images/chara1.png', 
 		 '444.png'
 		 );   
@@ -144,25 +151,52 @@ var posy;
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['444.png'];
 
+    
+
     map_init();
     kuma_init();
 
+    //title scene 
+    title = new Scene();
+    button_t = new Button("モノポリ　スタート",mytheme,320,320);
+    button_t.font = '60px serif';
+    button_t.moveTo(300,200);    
+    title.backgroundColor = "brown";
+    title.addChild(button_t);
+
+    //map action scene
+    map_scene = new Scene();
+    var pink = new Sprite(960,720);
+    pink.image = game.assets['960.png'];
+    map_scene.addChild(pink); 
+    pink.moveTo(0,0);
+    pink.opacity = 0.4;       
+
+
+    //game root scene 
     game.rootScene.addChild(button);
     game.rootScene.addChild(kuma);
-    
     map.loadData(mapArray);
     game.rootScene.addChild(map);
     game.rootScene.addChild(kuma);
     
-    button.moveTo(400,400);
-    
+
+    button.moveTo(800,600);
+   
     button.ontouchstart = but;
     kuma.onenterframe= kuma_mov;
+    
     game.pushScene(title);
     button_t.addEventListener("touchend", function(e) { game.popScene(); });
 	
    
 }
+function select(){
+   
+   
+
+}
+
 function kuma_mov(){
     
     if(t!=1 && 0 < kuma.vx ){
@@ -187,7 +221,13 @@ function kuma_mov(){
 	}	   
 	if(kuma.vx <= 0)
 	    {
+		posx = (kuma.x-8)/48;
+		posy = (kuma.y-8)/48;
 		t=1;
+		if(posx == 2 && posy == 1)
+		    {
+			game.pushScene(map_scene);
+		    }
 		game.rootScene.addChild(message_field);
 		if(((kuma.x - 8) / 16) % 2)
 		{
@@ -200,12 +240,9 @@ function kuma_mov(){
 	    }
     }
 }
+
 function map_init(){
-    
 
-
-
-    
     mapArray=[
 	      [,,,,,,,,,,,,],
 	      [,0,1,2,3,4,5,6,7,8,9,10],
