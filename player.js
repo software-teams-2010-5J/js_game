@@ -5,5 +5,6 @@ var Player = function(input_name){
     this.name = input_name;
     this.money = START_MONEY;
     this.potition = FIRST_POSITON;
+    this.point = 0;
 };
     

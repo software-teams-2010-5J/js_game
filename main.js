@@ -54,8 +54,6 @@ function preloadAssets(){
 	}
     }
    
-    
-   
     var second = new Scene();
     var third = new Scene();
     
@@ -75,7 +73,6 @@ function preloadAssets(){
     
     
 }
-
 function scene_init(){
 
     //title scene 
@@ -122,11 +119,11 @@ function player_init()
 	    player[i].turn = 1;
 	}
 }
-var i;
+
 function init(){
     var posx;
     var posy;
-
+    var i;
     player_init();
     for(i=0;i<PLAYER_NUM;i++){
 	console.log(player[i].turn);
@@ -135,13 +132,10 @@ function init(){
     kuma.image = game.assets['images/chara1.png'];
     map.image = game.assets['444.png'];
 
-    
-
     map_init();
     kuma_init();
     scene_init();
-
-
+    
 }
 
 function kuma_mov(){
@@ -189,8 +183,8 @@ function kuma_mov(){
 }
 
 function kuma_init(){
-    kuma.x = 48*1+8;
-    kuma.y = 48*1+8;
+    kuma.x = 48*11+8;
+    kuma.y = 48*11+8;
     kuma.scaleX = 0.9;
     kuma.scaleY = 0.8;
 }
@@ -204,7 +198,11 @@ function but()
 	kuma.v =2;
 	kuma.vx = r;
 	this.text = "dice:+"+r;
+	player[0].point += r;
+	if(r >= 40)
+	    player[0].point = 40 - player[0].point;
 	console.log("kuma.vx = "+kuma.vx);
+	console.log("nowpointname = "+field[player[0].point].name);
 	t=0;
     }
 }
