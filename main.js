@@ -1,10 +1,11 @@
 window.onload = preloadAssets;
 
-
+//scene
 var title;
 var map_scene;
 var dice_scene;
-var scene;
+var PLAYER_NUM = 1;
+
 var game;
 var button;
 var kuma;
@@ -14,8 +15,6 @@ var mapArray;
 var mapdirect;
 var WIDTH=960;
 var HEIGHT=720;
-
-v
 
 var t=1;
 var message_field;
@@ -77,30 +76,7 @@ function preloadAssets(){
     
 }
 
-function init(){
-    var i;
-    for(i = 0;i < 40;i++)
-    {
-	console.log(field[i].name);
-    }
-    player[0] = new Player("Akira0");
-    player[1] = new Player("Akira1");
-    player[2] = new Player("Akira2");
-    player[3] = new Player("Akira3");
-    for(i = 0;i < 4;i++)
-    {
-	console.log(player[i].name);
-    }
-    var posx;
-    var posy;
-    t=1;
-    kuma.image = game.assets['images/chara1.png'];
-    map.image = game.assets['444.png'];
-
-    
-
-    map_init();
-    kuma_init();
+function scene_init(){
 
     //title scene 
     title = new Scene();
@@ -125,15 +101,47 @@ function init(){
     map.loadData(mapArray);
     game.rootScene.addChild(map);
     game.rootScene.addChild(kuma);
-    
 
     button.moveTo(800,600);
-   
     button.ontouchstart = but;
     kuma.onenterframe= kuma_mov;
     
     game.pushScene(title);
-    button_t.addEventListener("touchend", function(e) { game.popScene(); });
+    button_t.addEventListener("touchend", function(e) { game.popScene(); });   
+    
+}    
+
+function player_init()
+{
+   
+    for(i=0;i<PLAYER_NUM;i++)
+	{
+	    player[i] = new Player("Akira"+i);
+	    player[i].money=1000;
+	    player[i].site=0;
+	    player[i].turn = 1;
+	}
+}
+var i;
+function init(){
+    var posx;
+    var posy;
+
+    player_init();
+    for(i=0;i<PLAYER_NUM;i++){
+	console.log(player[i].turn);
+    }
+    t=1;
+    kuma.image = game.assets['images/chara1.png'];
+    map.image = game.assets['444.png'];
+
+    
+
+    map_init();
+    kuma_init();
+    scene_init();
+
+
 }
 
 function kuma_mov(){
