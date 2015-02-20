@@ -4,6 +4,7 @@ window.onload = preloadAssets;
 var title;
 var map_scene;
 var dice_scene;
+var effect_scene;
 var PLAYER_NUM = 1;
 
 var game;
@@ -35,8 +36,7 @@ function preloadAssets(){
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     
     dice_scene = new Scene();
-   
-    
+
     mytheme = {
 	normal : { 
 	    color : '#00F',
@@ -91,6 +91,10 @@ function scene_init(){
     pink.moveTo(0,0);
     pink.opacity = 0.4;       
 
+    effect_scene = new Scene();
+    effect_scene.addChild(pink);
+    pink.moveTo(0,0);
+    pink.opacity = 0.4;       
 
     //game root scene 
     game.rootScene.addChild(button);
@@ -199,6 +203,10 @@ function but()
 	    player[0].point = player[0].point - 40;
 	}
 	msglabel.text = field[player[0].point].name;
+	game.pushScene(effect_scene);
+	if(field[player[0].point].effect_id >= 3)
+	    effect[field[player[0].point].effect_id - 3].function();
+	game.popScene();
 	console.log("kuma.vx = "+kuma.vx);
 	t=0;
     }

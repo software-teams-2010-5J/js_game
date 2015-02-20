@@ -4,7 +4,7 @@ field[0]={
     name:"スタート",
     value:200,
     group_id:10,
-    effect_id:2,
+    effect_id:3,
 };
 field[1]={
     name:"地中海通り",
@@ -16,7 +16,7 @@ field[2]={
     name:"共同基金",
     value:0,
     group_id:10,
-    effect_id:3,
+    effect_id:4,
 };
 field[3]={
     name:"バルティック通り",
@@ -28,7 +28,7 @@ field[4]={
     name:"所得税",
     value:0,
     group_id:10,
-    effect_id:5,
+    effect_id:6,
 };
 field[5]={
     name:"リーディング鉄道",
@@ -46,7 +46,7 @@ field[7]={
     name:"チャンス",
     value:0,
     group_id:10,
-    effect_id:4,
+    effect_id:5,
 };
 field[8]={
     name:"バーモント通り",
@@ -64,7 +64,7 @@ field[10]={
     name:"刑務所",
     value:50,
     group_id:10,
-    effect_id:7,
+    effect_id:8,
 };
 field[11]={
     name:"セントチャールズ通り",
@@ -106,7 +106,7 @@ field[17]={
     name:"共同基金",
     value:0,
     group_id:10,
-    effect_id:3,
+    effect_id:4,
 };
 field[18]={
     name:"テネシー通り",
@@ -124,7 +124,7 @@ field[20]={
     name: "駐車場",
     value: 0,
     group_id: 10,
-    effect_id: 9,
+    effect_id: 10,
 };
 field[21]={
     name: "ケンタッキー通り",
@@ -136,7 +136,7 @@ field[22]={
     name: "チャンス",
     value: 0,
     group_id: 10,
-    effect_id: 9,
+    effect_id: 5,
 };
 field[23]={
     name: "インディアナ通り",
@@ -154,7 +154,7 @@ field[25]={
     name: "B&O鉄道",
     value: 260,
     group_id: 5,
-    effect_id: 0,
+    effect_id: 1,
 };
 field[26]={
     name: "アトランティック通り",
@@ -184,7 +184,7 @@ field[30]={
     name: "刑務所に入れ",
     value: 0,
     group_id: 10,
-    effect_id: 8,
+    effect_id: 9,
 };
 field[31]={
     name: "パシフィック通り",
@@ -202,7 +202,7 @@ field[33]={
     name: "共同基金",
     value: 0,
     group_id: 10,
-    effect_id: 3,
+    effect_id: 4,
 };
 field[34]={
     name: "ペンシルバニア通り",
@@ -220,7 +220,7 @@ field[36]={
     name: "チャンス",
     value: 0,
     group_id: 10,
-    effect_id: 4,
+    effect_id: 5,
 };
 field[37]={
     name: "パークプレイス",
@@ -232,7 +232,7 @@ field[38]={
     name: "物品税",
     value: 75,
     group_id: 10,
-    effect_id: 6,
+    effect_id: 7,
 };
 field[39]={
     name: "ボードウォーク",
