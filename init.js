@@ -50,8 +50,8 @@ function scene_init(){
     game.rootScene.addChild(button);
     button.moveTo(800,600);
     turn_num = 0;
-    button.ontouchstart = dice;
-
+    button.ontouchstart = dice;    
+    player[0].onenterframe= mono;
     player[0].onenterframe= kuma_mov;
    
     game.pushScene(title);

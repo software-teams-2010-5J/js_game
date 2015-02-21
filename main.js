@@ -10,7 +10,6 @@ var turn_num;
 
 var PLAYER_NUM = 2;
 
-
 var game;
 var button;
 var kuma;
@@ -83,21 +82,29 @@ function init(){
     map_init();    
     // kuma_init();
     player_init();
-    for(i=0;i<PLAYER_NUM;i++){
-	console.log(player[i].x);
-    } 
     scene_init();
+    //    game.addEventListener('enterframe',mono);
+}
+function mono(){
+
 }
 function dice()
 {
+    turn_num ++;	
+    if(turn_num == 0){
+	game.rootScene.addChild(button);
+    }else if(turn_num == PLAYER_NUM-1){
+	game.rootScene.removeChild(button);
+    }
     if(t==1){
-    var r = Math.floor(Math.random() * 6) + 1;
+	var r = Math.floor(Math.random() * 6) + 1;
     this.text = "dice:"+r;
     player[0].v = r;
     player[0].point += r;
     console.log(t);
     t =0;
     console.log("player[0].v = "+player[0].v);
+
     }
 }
 
