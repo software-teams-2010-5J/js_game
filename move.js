@@ -1,37 +1,44 @@
-function kuma_mov(){
-    
-    if(t!=1 && 0 < kuma.vx ){
-	posx = (kuma.x-8)/48;
-	posy = (kuma.y-8)/48;
+function judge_site()
+{
+    if(posx == 2 && posy == 1)
+	{
+	    turn_mes.text = "Owner :"+field.owner;
+	    game.pushScene(site_scene);
+	    
+	}
+}
+
+function kuma_mov()
+{
+    if(t!=1 && 0 < player[0].v){
+	posx = (player[0].x-8)/48;
+	posy = (player[0].y-8)/48;
 	
 	if(mapdirect[posy][posx]==0){
-	    kuma.y = kuma.y - 48;
-	    kuma.vx--;
+	    player[0].y = player[0].y - 48;
+	    player[0].v--;
 	}
 	else if(mapdirect[posy][posx]==1){
-	    kuma.x = kuma.x- 48;
-	    kuma.vx--;
+	    player[0].x = player[0].x- 48;
+	    player[0].v--;
 	}
 	else if(mapdirect[posy][posx]==2){
-	    kuma.y = kuma.y+ 48;
-	    kuma.vx--;
+	    player[0].y = player[0].y+ 48;
+	    player[0].v--;
 	}
 	else if(mapdirect[posy][posx]==3){
-	    kuma.x = kuma.x+ 48;
-	    kuma.vx--;
+	    player[0].x = player[0].x+ 48;
+	    player[0].v--;
 	}	   
-	if(kuma.vx <= 0)
+	if(player[0].v <= 0)
 	    {
-		posx = (kuma.x-8)/48;
-		posy = (kuma.y-8)/48;
+		posx = (player[0].x-8)/48;
+		posy = (player[0].y-8)/48;
 		t=1;
-		if(posx == 2 && posy == 1)
-		    {
-			game.pushScene(site_scene);
-		    }
+		judge_site();
 		game.rootScene.addChild(message_field);
 		use_message = msglabel;
-		console.log(kuma.x);
+		console.log(player[0].x);
 		game.rootScene.addChild(use_message);
 	    }
     }
