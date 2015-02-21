@@ -100,6 +100,7 @@ function map_init(){
 }
 
 //テスト文字列
+
 var msglabel;
 msglabel = new Label();
 msglabel.font = "32px monospace";
@@ -107,3 +108,11 @@ msglabel.color = "#000000";
 msglabel.text = "移動が終了しましたえ";
 msglabel.x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
 msglabel.y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
+var turn_mes;
+turn_mes = new Label();
+turn_mes.font = "32px monospace";
+turn_mes.color = "#000000";
+turn_mes.text = "Owner :";
+turn_mes.x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
+turn_mes.y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
+

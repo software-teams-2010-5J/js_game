@@ -2,10 +2,12 @@ window.onload = preloadAssets;
 
 //scene
 var title;
-var map_scene;
+var site_scene;
 var dice_scene;
 var effect_scene;
-var PLAYER_NUM = 1;
+
+var PLAYER_NUM = 4;
+
 
 var game;
 var button;
@@ -25,7 +27,7 @@ var SPRITE_WIDTH  = 320;
 var SPRITE_HEIGHT = 280;
 var MAP_NUM = 10;
 var button_t;
-
+var message_site;
 //var pink;
 
 function preloadAssets(){
@@ -34,6 +36,7 @@ function preloadAssets(){
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
+    message_site = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     
     dice_scene = new Scene();
 
@@ -60,7 +63,8 @@ function preloadAssets(){
     game.preload(
 		 '960.png',
 		 'images/chara1.png', 
-		 '444.png'
+		 '444.png',
+		 'black.png'
 		 );   
     
     game.rootScene.backgroundColor = "blue";    
@@ -83,19 +87,24 @@ function scene_init(){
     title.backgroundColor = "brown";
     title.addChild(button_t);
 
-    //map action scene
-    map_scene = new Scene();
+    //site action scene
+    site_scene = new Scene();
     var pink = new Sprite(960,720);
     pink.image = game.assets['960.png'];
-    map_scene.addChild(pink); 
+    site_scene.addChild(pink); 
     pink.moveTo(0,0);
     pink.opacity = 0.4;       
 
+    site_scene.addChild(turn_mes);
+ 
+    //effect action scene
     effect_scene = new Scene();
-    effect_scene.addChild(pink);
-    pink.moveTo(0,0);
-    pink.opacity = 0.4;       
-
+    var black = new Sprite(960,720);
+    black.image = game.assets['black.png'];
+    site_scene.addChild(black);
+    black.moveTo(0,0);
+    black.opacity = 0.4;
+       
     //game root scene 
     game.rootScene.addChild(button);
     game.rootScene.addChild(kuma);
@@ -114,14 +123,8 @@ function scene_init(){
 
 function player_init()
 {
-   
-    for(i=0;i<PLAYER_NUM;i++)
-	{
-	    player[i] = new Player("Akira"+i);
-	    player[i].money=1000;
-	    player[i].site=0;
-	    player[i].turn = 1;
-	}
+    for( i=0;i<PLAYER_NUM; i++)
+	{player[i] = new Player("Akira"+i);}
 }
 
 function init(){
@@ -171,7 +174,7 @@ function kuma_mov(){
 		t=1;
 		if(posx == 2 && posy == 1)
 		    {
-			game.pushScene(map_scene);
+			game.pushScene(site_scene);
 		    }
 		game.rootScene.addChild(message_field);
 		use_message = msglabel;
@@ -182,8 +185,10 @@ function kuma_mov(){
 }
 
 function kuma_init(){
+
     kuma.x = 48*11+8;
     kuma.y = 48*11+8;
+
     kuma.scaleX = 0.9;
     kuma.scaleY = 0.8;
 }
@@ -199,8 +204,8 @@ function but()
 	this.text = "dice:+"+r;
 	player[0].point += r;
 	if(player[0].point >= 40)
-	{
-	    player[0].point = player[0].point - 40;
+	    {
+		player[0].point = player[0].point - 40;
 	}
 	msglabel.text = field[player[0].point].name;
 	game.pushScene(effect_scene);
@@ -208,6 +213,7 @@ function but()
 	    effect[field[player[0].point].effect_id - 3].function();
 	game.popScene();
 	console.log("kuma.vx = "+kuma.vx);
+	console.log("nowpointname = "+field[0].name);
 	t=0;
     }
 }
