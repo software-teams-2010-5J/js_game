@@ -22,7 +22,6 @@ var MDirect;
 var WIDTH=960;
 var HEIGHT=720;
 
-
 var message_field;
 
 var use_message;
@@ -45,8 +44,9 @@ function preloadAssets(){
 		 'pink.png',
 		 '444.png',
 		 'images/chara1.png', 
-		 'black.png'
-		 );   
+		 'black.png',
+    'yesno.png'
+    );   
     
     game.rootScene.backgroundColor = "blue";    
     game.fps = 30;
@@ -67,6 +67,7 @@ function init(){
     scene_init();
     game.addEventListener('enterframe',mono);
 }
+
 function mono(){
     if(turn_num == 0 && treat == true)
 	{
@@ -77,6 +78,7 @@ function mono(){
 	    //game.rootScene.removeChild(button);
 	    dice();
 	}
+    
 }
 function AI()
 {
@@ -92,6 +94,8 @@ function dice()
 	this.text = "dice:"+r;
 	move(r);
 	fl =0;
+	judge_site();
+	
 	player[turn_num].tl.then(function(){
 		turn_num++;
 		turn_num%=PLAYER_NUM;

@@ -38,12 +38,31 @@ function scene_init(){
     //site action scene
     site_scene = new Scene();
     var pink = new Sprite(960,720);
-    message_site = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, 200,100);
+    message_site = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     pink.image = game.assets['960.png'];
     site_scene.addChild(pink); 
+    site_scene.addChild(message_site); 
     pink.moveTo(0,0);
     pink.opacity = 0.7;       
     site_scene.addChild(turn_mes);
+    var Yesbutton = new Button("Yes","light",MESSAGE_WINDOW_SIZE_Y,100);
+    Yesbutton.ontouchstart = function(){
+	field[point].owner = turn_num;
+	console.log("購入前:"+player[turn_num].money);
+	player[turn_num].money -= field[point].value;
+	console.log("購入後:"+player[turn_num].money);
+	game.popScene();    
+    };
+    Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
+    var Nobutton = new Button("No","light",MESSAGE_WINDOW_SIZE_Y,100);
+    Nobutton.ontouchstart = function(){
+	game.popScene();    
+    };
+    Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
+
+    site_scene.addChild(Yesbutton);
+    site_scene.addChild(Nobutton);	
+
     
     //effect action scene
     effect_scene = new Scene();

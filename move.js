@@ -1,12 +1,3 @@
-function judge_site()
-{
-    if(posx == 2 && posy == 1)
-	{
-	    turn_mes.text = "Owner :"+field.owner;
-	    game.pushScene(site_scene);
-	    
-	}
-}
 function move(r)
 {
     var to = r+ player[turn_num].point;
