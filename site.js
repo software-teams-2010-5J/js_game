@@ -6,10 +6,10 @@ function judge_site()
     else
 	{
 	    effect[field[player[turn_num].point].effect_id - 3].function();
-	    sitf =1;   
+	    sitf =1;
 	}
-}
 
+}
 function site()
 {
     //現在電力会社、鉄道のことは考慮してないです。
@@ -24,7 +24,6 @@ function site()
 	}else{
 	    AI(1);
 	}
-	sitf =1;
     }
     else
     {
@@ -38,6 +37,7 @@ function site()
 	    player[turn_num].money -= field[point].value * 0.5;
 	    player[field[point].owner].money += field[point].value * 0.5;
 	    console.log("player:"+player[turn_num].money+"owner"+player[field[point].owner].money);
+	    sitf=1;
 	}
     }
 
