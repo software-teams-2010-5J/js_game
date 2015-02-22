@@ -23,8 +23,11 @@ function site()
 	console.log("所有者は"+point_owner.name);
 	if(point_owner != turn_num)
 	{
+	    //今レンタル料金0.5にしてます。
+	    console.log("player:"+player[turn_num].money+"owner"+player[field[point].owner].money);
 	    player[turn_num].money -= field[point].value * 0.5;
 	    player[field[point].owner].money += field[point].value * 0.5;
+	    console.log("player:"+player[turn_num].money+"owner"+player[field[point].owner].money);
 	}
     }
 
