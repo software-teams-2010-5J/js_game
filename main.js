@@ -14,7 +14,9 @@ var game;
 var button;
 var kuma;
 
-var fl=1;
+var fl=0; //現状のターンのプレイヤーが行動済み(=1)かまだ（＝０）か
+var Anf=0;//アニメーション済み(=1)かどうか
+
 var map;
 var mapArray;
 var mapdirect;
@@ -24,6 +26,7 @@ var HEIGHT=720;
 
 
 var message_field;
+var root_message_field;
 
 var use_message;
 var SPRITE_WIDTH  = 320;
@@ -34,10 +37,11 @@ var message_site;
 
 function preloadAssets(){
     game = new Game(WIDTH,HEIGHT);
-    button = new Button("dice","light",50,50);
+    button = new Button("dice","light",50,50);   
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
+    root_message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     dice_scene = new Scene();
     
     game.preload(
@@ -45,6 +49,7 @@ function preloadAssets(){
 		 'pink.png',
 		 '444.png',
 		 'images/chara1.png', 
+		 'chara1.gif', 
 		 'black.png'
 		 );   
     
@@ -61,22 +66,37 @@ function init(){
     var posy;
     var i;
     t=1;
-    map_init();    
+    console.log("i");
+    map_init();
     // kuma_init();
     player_init();
+
     scene_init();
+
     game.addEventListener('enterframe',mono);
 }
-function mono(){
-    if(turn_num == 0 && treat == true)
+function increment()
+{
+    turn_num++;
+    turn_num%=PLAYER_NUM;
+    if(turn_num == 0 )
 	{
-	    console.log("your turn");
+	    game.rootScene.addChild(button);	
 	}
-    if(turn_num != 0 && treat == true && fl == 1)
+
+}
+function mono(){
+    console.log(player[0].name);
+    /*    if(turn_num == 0 && treat == true && fl == 0)
+	{
+	    	
+	}
+    if(turn_num != 0 && treat == true && fl == 0)
 	{
 	    //game.rootScene.removeChild(button);
-	    dice();
+	    //    AI();
 	}
+    */
 }
 function AI()
 {
@@ -84,29 +104,19 @@ function AI()
 }
 function dice()
 {
-    console.log(fl);
-    //    game.rootScene.removeChild(message_field);
-    //game.rootScene.removeChild(use_message);
-    if(fl == 1){
+    if(fl == 0){
 	var r = Math.floor(Math.random() * 6) + 1;
-	this.text = "dice:"+r;
+	button.text = "dice:"+r;		
 	move(r);
-	fl =0;
+	fl =1;
 	player[turn_num].tl.then(function(){
-		turn_num++;
-		turn_num%=PLAYER_NUM;
-		fl =1;
+		Anf =1;
 		if(turn_num == 0)
 		    {
-			game.rootScene.addChild(button);
+			game.rootScene.removeChild(button);
 			console.log("your turn");
 		    }
-		else if(turn_num != 0 )
-		    {
-			game.rootScene.removeChild(button);
-			
-		    }
-	    });
+	    });    
     }
 }
 
