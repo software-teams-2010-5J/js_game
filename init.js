@@ -18,12 +18,11 @@ mytheme = {
     
 function player_init()
 {
-    for( i=0;i<PLAYER_NUM; i++)
+    for(i = 0;i < PLAYER_NUM; i++)
 	{
 	    player[i] = new Player("Akira"+i);
 	    player[i].image = game.assets['images/chara1.png'];
-	}
-    
+	}   
 }
 
 function kuma_init(){
@@ -81,7 +80,6 @@ function title_init(){
 	    game.popScene();
 	    }
 	});
-    
 }    
  
 
@@ -111,12 +109,14 @@ function scene_init(){
 	console.log("購入前:"+player[turn_num].money);
 	player[turn_num].money -= field[point].value;
 	console.log("購入後:"+player[turn_num].money);
+	sitf =1;
 	game.popScene();    
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
     var Nobutton = new Button("No","light",MESSAGE_WINDOW_SIZE_Y,100);
     Nobutton.ontouchstart = function(){
-	game.popScene();    
+	game.popScene();
+	sitf =1;
     };
     Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
     

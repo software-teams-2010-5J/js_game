@@ -4,7 +4,10 @@ function judge_site()
     if(field[player[turn_num].point].effect_id <= 2)
 	site();
     else
-	effect[field[player[turn_num].point].effect_id - 3].function();
+	{
+	    effect[field[player[turn_num].point].effect_id - 3].function();
+	    sitf =1;   
+	}
 }
 
 function site()
@@ -18,7 +21,10 @@ function site()
 	if(turn_num == 0){
 	    site_scene.addChild(msglabel);
 	    game.pushScene(site_scene);
+	}else{
+	    AI(1);
 	}
+	sitf =1;
     }
     else
     {

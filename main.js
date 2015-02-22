@@ -14,9 +14,9 @@ var game;
 var button;
 var kuma;
 
-var fl=0; //現状のターンのプレイヤーが行動済み(=1)かまだ（＝０）か
+var fl=0; //現状のターンのプレイヤーがサイコロふり済み(=1)かまだ（＝０）か
 var Anf=0;//アニメーション済み(=1)かどうか
-
+var sitf=0;//サイト内で選択済み(=1)かどうか
 var map;
 var mapArray;
 var mapdirect;
@@ -78,28 +78,49 @@ function increment()
 {
     turn_num++;
     turn_num%=PLAYER_NUM;
+    sitf = Anf = fl =0;
     if(turn_num == 0 )
 	{
-	    game.rootScene.addChild(button);	
+	    game.rootScene.addChild(button);
 	}
 
 }
 
 function mono(){
-    console.log(player[0].name);
-    if(turn_num == 0 && treat == true && fl == 0)
-	{
-	    
+
+    if(turn_num == 0 && treat == true && fl == 1)
+	{    
+	    if(Anf == 1){
+		judge_site();
+		sitf =1;
+	    }   
 	}
-    if(turn_num != 0 && treat == true && fl == 0)
+    if(turn_num != 0 && treat == true)
 	{
 	    //game.rootScene.removeChild(button);
-	    //    AI();
+	    if(fl==0){
+		dice();
+	    }else if(Anf == 1){
+		judge_site();
+	    }
 	}
+    if(sitf ==1 && Anf==1 && fl ==1)
+	increment();
 }
-function AI()
+function AI(q)
 {
-    dice();
+    if(q==1){
+	point = player[turn_num].point;
+	if(field[point].value < player[turn_num].money){
+	    field[point].owner = turn_num;
+	    console.log("購入前:"+player[turn_num].money);
+	    player[turn_num].money -= field[point].value;
+	    console.log("購入後:"+player[turn_num].money);
+	}else{
+	    
+	}
+	sitf =1;
+    }
 }
 function dice()
 {
@@ -108,7 +129,7 @@ function dice()
 	button.text = "dice:"+r;		
 	move(r);
 	fl =1;
-	judge_site();
+	
 	player[turn_num].tl.then(function(){
 		Anf =1;
 		if(turn_num == 0)
