@@ -1,5 +1,4 @@
 enchant();
-
 //ゲームウインドウサイズ
 var WIDTH = 960;
 var HEIGHT = 720;

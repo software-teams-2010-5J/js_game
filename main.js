@@ -44,8 +44,9 @@ function preloadAssets(){
 		 'pink.png',
 		 '444.png',
 		 'images/chara1.png', 
-		 'black.png'
-		 );   
+		 'black.png',
+    'yesno.png'
+    );   
     
     game.rootScene.backgroundColor = "blue";    
     game.fps = 30;
