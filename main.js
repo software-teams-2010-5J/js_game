@@ -14,7 +14,7 @@ var game;
 var button;
 var kuma;
 
-var fl=0; //現状のターンのプレイヤーが行動済み(=1)かまだ（＝０）か
+var fl=0; //サイコロをふったかどうか
 var Anf=0;//アニメーション済み(=1)かどうか
 
 var map;
