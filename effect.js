@@ -54,7 +54,7 @@ effect[6] = {
 effect[7] = {
     function: function(){
 	console.log("駐車場");
-	msglabel.text = "駐車場";
+	msglabel.text = "駐車場:何もなし";
 	effect_scene.addChild(msglabel);
 	}
 };
