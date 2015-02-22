@@ -24,14 +24,16 @@ effect[2] = {
 effect[3] = {
     function: function(){
 	console.log("所得税");
-	msglabel.text = "所得税";
+	msglabel.text = "所得税:200$支払う";
+	player[turn_num].money -= 200;
 	effect_scene.addChild(msglabel);
 	}
 };
 effect[4] = {
     function: function(){
 	console.log("物品税");
-	msglabel.text = "物品税";
+	msglabel.text = "物品税:100$支払う";
+	player[turn_num].money -= 100;
 	effect_scene.addChild(msglabel);
 	}
 };
