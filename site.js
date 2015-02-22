@@ -1,3 +1,8 @@
+function judge_site()
+{
+    if(field[player[turn_num].point].effect_id <= 2)
+	site();
+}
 function site()
 {
     game.pushScene(site_scene);

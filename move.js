@@ -1,8 +1,3 @@
-function judge_site()
-{
-    if(field[player[turn_num].point].effect_id <= 2)
-	site();
-}
 function move(r)
 {
     var to = r+ player[turn_num].point;
