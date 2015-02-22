@@ -1,4 +1,21 @@
-
+var name;
+mytheme = {
+    normal : { 
+	color : '#00F',
+	background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
+	border: { color: '#f99', width: 1, type: 'solid' },
+	textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+    },
+    active : { 
+	color : '#00F',
+	background: { type: 'linear-gradient', start: '#fee', end: '#fd6' },
+	border: { color: '#fbb', width: 1, type: 'solid' },
+	textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+    }
+}
+    
 function player_init()
 {
     for( i=0;i<PLAYER_NUM; i++)
@@ -6,27 +23,70 @@ function player_init()
 	    player[i] = new Player("Akira"+i);
 	    player[i].image = game.assets['images/chara1.png'];
 	}
+    
 }
 
 function kuma_init(){
     kuma.image = game.assets['images/chara1.png'];
     kuma.x = 48*11+8;
     kuma.y = 48*11+8;
-
     kuma.scaleX = 0.9;
     kuma.scaleY = 0.8;
     game.rootScene.addChild(kuma);
 }
-
-function scene_init(){
-
+var tb;
+var name;
+function title_init(){
     //title scene 
     title = new Scene();
     button_t = new Button("モノポリ　スタート",mytheme,320,320);
     button_t.font = '60px serif';
     button_t.moveTo(300,200);    
-    title.backgroundColor = "brown";
+    title.backgroundColor = "white";
     title.addChild(button_t);
+
+    var lbl = new Label("name");
+    var tb = new InputTextBox();
+    lbl.moveTo(300,100);
+    lbl.width = 100;
+    lbl.textAlign = "center";
+    lbl.color = "#ffffff";
+    var navigationBar = new NavigationBar(lbl);
+    var bt = new Button("input name","light",50,50);
+    tb.moveTo(WIDTH/2 -50, 200);
+    bt.moveTo(WIDTH/2,330);
+    tb.width = 200;
+    //    enchant.widget._env.textMinHeight = "300px";
+    //    enchant.widget._env.textMaxHeight = "300px";
+    tb.height = 100;
+    tb.placeholder = "名前を入力してください";
+    
+    
+    button_t.addEventListener("touchend", function(e) { 
+	    treat = true;
+	    title.addChild(navigationBar);
+	    title.addChild(tb);
+	    title.addChild(bt);
+	    title.addChild(lbl);
+	    title.removeChild(button_t);
+	    //   game.popScene();
+	});       
+    bt.addEventListener("touchend",function(e){
+	    if(tb.value =="")
+		{
+		    alert("name wo irete");
+		}
+	    else{
+		player[0].name = tb.value;
+	    game.popScene();
+	    }
+	});
+    
+}    
+ 
+
+function scene_init(){
+    title_init();
 
     //dice scene
     dice_scene = new Scene();
@@ -56,7 +116,7 @@ function scene_init(){
 	game.popScene();    
     };
     Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
-
+    
     site_scene.addChild(Yesbutton);
     site_scene.addChild(Nobutton);	
 
@@ -78,9 +138,9 @@ function scene_init(){
     button_t.addEventListener("touchend", function(e) { 
 	    treat = true;
 	    game.popScene();
-	});   
+    });   
     
-}    
+}   
 function map_init(){
     map.image = game.assets['444.png'];
     mapArray=[
@@ -123,21 +183,3 @@ function map_init(){
     game.rootScene.addChild(map);
 }
 
-
-mytheme = {
-    normal : { 
-	color : '#00F',
-	background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
-	border: { color: '#f99', width: 1, type: 'solid' },
-	textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
-	boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
-    },
-    active : { 
-	color : '#00F',
-	background: { type: 'linear-gradient', start: '#fee', end: '#fd6' },
-	border: { color: '#fbb', width: 1, type: 'solid' },
-	textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
-	boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
-    }
-}
-    
