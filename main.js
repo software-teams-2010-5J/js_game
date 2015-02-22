@@ -7,16 +7,17 @@ var dice_scene;
 var effect_scene;
 var turn_num;
 var treat;
-
+var mess=[];    
 var PLAYER_NUM = 2;
-
+var pfl=0;
 var game;
 var button;
 var kuma;
 
-var fl=0; //サイコロをふったかどうか
-var Anf=0;//アニメーション済み(=1)かどうか
+var fl=0; //現状のターンのプレイヤーがサイコロふり済み(=1)かまだ（＝０）か
 
+var Anf=0;//アニメーション済み(=1)かどうか
+var sitf=0;//サイト内で選択済み(=1)かどうか このフラグを各最終処理を行ったのちに立てる
 var map;
 var mapArray;
 var mapdirect;
@@ -64,6 +65,7 @@ function init(){
     var posy;
     var i;
     t=1;
+
     console.log("i");
     map_init();
     // kuma_init();
@@ -76,45 +78,83 @@ function init(){
 
 function increment()
 {
+    mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
     turn_num++;
     turn_num%=PLAYER_NUM;
+    sitf = 0;
+    Anf = 0;
+    fl = 0;
+    pfl=0;
     if(turn_num == 0 )
 	{
-	    game.rootScene.addChild(button);	
+	    game.rootScene.addChild(button);
 	}
 
 }
 
 function mono(){
-    console.log(player[0].name);
-    if(turn_num == 0 && treat == true && fl == 0)
-	{
-	    
+    
+    if(turn_num == 0 && treat == true && fl == 1 && sitf ==0)
+	{    
+	    if(Anf == 1 && pfl ==0){
+		pfl =1;
+		console.log("sfafafafaf");
+		judge_site();
+	    }   
 	}
-    if(turn_num != 0 && treat == true && fl == 0)
+    if(turn_num != 0 && treat == true && sitf ==0)
 	{
 	    //game.rootScene.removeChild(button);
-	    //    AI();
+	    if(fl == 0 && pfl ==0)
+		AI(2);
+	    if(fl == 1 && Anf == 1 && pfl ==0)
+		AI(3);
 	}
+    if(sitf ==1 && Anf==1 && fl ==1){
+	increment();}
 }
-function AI()
+function AI(q)
 {
-    dice();
+    if(q==1){
+	point = player[turn_num].point;
+	if(field[point].value < player[turn_num].money){
+	    field[point].owner = turn_num;
+	    console.log("購入前:"+player[turn_num].money);
+	    player[turn_num].money -= field[point].value;
+	    console.log("購入後:"+player[turn_num].money);
+	    console.log(player[turn_num].name+":購入しました");
+
+	
+	}else{
+	    
+	}
+	sitf=1;
+    }
+    else if(q==2){
+	pfl =1;
+	dice();
+    }
+    else if(q==3){
+	pfl =1;
+	judge_site();
+    }
 }
 function dice()
 {
     if(fl == 0){
+
 	var r = Math.floor(Math.random() * 6) + 1;
 	button.text = "dice:"+r;		
 	move(r);
 	fl =1;
-	judge_site();
 	player[turn_num].tl.then(function(){
 		Anf =1;
+		pfl=0;
 		if(turn_num == 0)
 		    {
+			console.log("sss:"+turn_num+":"+sitf+":"+fl+":"+Anf);
 			game.rootScene.removeChild(button);
-			console.log("your turn");
+
 		    }
 	    });    
     }
@@ -142,3 +182,5 @@ function but()
 	t=0;
     }
 }
+
+
