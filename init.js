@@ -44,13 +44,10 @@ function scene_init(){
     site_scene.addChild(message_site); 
     pink.moveTo(0,0);
     pink.opacity = 0.7;       
-    site_scene.addChild(turn_mes);
     var Yesbutton = new Button("Yes","light",MESSAGE_WINDOW_SIZE_Y,100);
     Yesbutton.ontouchstart = function(){
 	field[point].owner = turn_num;
-	console.log("購入前:"+player[turn_num].money);
 	player[turn_num].money -= field[point].value;
-	console.log("購入後:"+player[turn_num].money);
 	game.popScene();    
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
@@ -63,7 +60,6 @@ function scene_init(){
     site_scene.addChild(Yesbutton);
     site_scene.addChild(Nobutton);	
 
-    
     //effect action scene
     effect_scene = new Scene();
     var black = new Sprite(960,720);
@@ -71,7 +67,8 @@ function scene_init(){
     effect_scene.addChild(black);
     black.moveTo(0,0);
     black.opacity = 0.4;
-       
+    message_effect = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);       
+    effect_scene.addChild(message_effect); 
     //game root scene     
     turn_num = 0;    
     //player[0].onenterframe= mono;
