@@ -56,7 +56,7 @@ function scene_init(){
     //game root scene     
     turn_num = 0;    
     //player[0].onenterframe= mono;
-    player[0].onenterframe= kuma_mov;
+    //player[0].onenterframe= kuma_mov;
     
     game.pushScene(title);
     button_t.addEventListener("touchend", function(e) { 
@@ -106,3 +106,22 @@ function map_init(){
     map.loadData(mapArray);
     game.rootScene.addChild(map);
 }
+
+
+mytheme = {
+    normal : { 
+	color : '#00F',
+	background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
+	border: { color: '#f99', width: 1, type: 'solid' },
+	textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+    },
+    active : { 
+	color : '#00F',
+	background: { type: 'linear-gradient', start: '#fee', end: '#fd6' },
+	border: { color: '#fbb', width: 1, type: 'solid' },
+	textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
+	boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
+    }
+}
+    

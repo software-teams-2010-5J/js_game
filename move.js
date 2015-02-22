@@ -71,6 +71,7 @@ function move(r)
 		player[turn_num].tl.moveBy(48*(to-from),0,30);
 	    }
 	}
+    
     player[turn_num].point = to%40;   
     console.log("new point:"+player[turn_num].point);
   

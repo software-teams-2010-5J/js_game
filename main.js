@@ -14,6 +14,7 @@ var game;
 var button;
 var kuma;
 
+var fl=1;
 var map;
 var mapArray;
 var mapdirect;
@@ -31,7 +32,6 @@ var MAP_NUM = 10;
 var button_t;
 var message_site;
 
-
 function preloadAssets(){
     game = new Game(WIDTH,HEIGHT);
     button = new Button("dice","light",50,50);
@@ -39,23 +39,6 @@ function preloadAssets(){
     map = new Map(48, 48);
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     dice_scene = new Scene();
-
-    mytheme = {
-	normal : { 
-	    color : '#00F',
-	    background: { type: 'linear-gradient', start: '#fcc', end: '#fc6' },
-	    border: { color: '#f99', width: 1, type: 'solid' },
-	    textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
-	    boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
-	},
-	active : { 
-	    color : '#00F',
-	    background: { type: 'linear-gradient', start: '#fee', end: '#fd6' },
-	    border: { color: '#fbb', width: 1, type: 'solid' },
-	    textShadow: { offsetX: 0.5, offsetY: 0.5, blur: '3px', color: '#F00' },
-	    boxShadow: { offsetX: 2, offsetY: 2, blur: '5px', color: 'rgba(0, 0, 0, 0.3)' }
-	}
-    }
     
     game.preload(
 		 '960.png',
@@ -88,24 +71,43 @@ function mono(){
     if(turn_num == 0 && treat == true)
 	{
 	    console.log("your turn");
-	    //	    game.pushScene(dice_scene);
 	}
+    if(turn_num != 0 && treat == true && fl == 1)
+	{
+	    //game.rootScene.removeChild(button);
+	    dice();
+	}
+}
+function AI()
+{
+    dice();
 }
 function dice()
 {
-    game.rootScene.removeChild(message_field);
-    game.rootScene.removeChild(use_message);
+    console.log(fl);
+    //    game.rootScene.removeChild(message_field);
+    //game.rootScene.removeChild(use_message);
+    if(fl == 1){
 	var r = Math.floor(Math.random() * 6) + 1;
 	this.text = "dice:"+r;
 	move(r);
-	turn_num++;
-	turn_num%=4;
-	if(turn_num == 0){
-	    game.rootScene.addChild(button);
-	}else if(turn_num == PLAYER_NUM-1){
-	    game.rootScene.removeChild(button);
-	}
-
+	fl =0;
+	player[turn_num].tl.then(function(){
+		turn_num++;
+		turn_num%=PLAYER_NUM;
+		fl =1;
+		if(turn_num == 0)
+		    {
+			game.rootScene.addChild(button);
+			console.log("your turn");
+		    }
+		else if(turn_num != 0 )
+		    {
+			game.rootScene.removeChild(button);
+			
+		    }
+	    });
+    }
 }
 
 function but()
