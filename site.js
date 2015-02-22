@@ -4,9 +4,16 @@ function judge_site()
     if(field[player[turn_num].point].effect_id <= 2)
 	site();
     else
-	effect[field[player[turn_num].point].effect_id - 3].function();
+ 	effect_step();
+	
 }
-
+function effect_step()
+{
+    game.pushScene(effect_scene);
+    effect[field[player[turn_num].point].effect_id - 3].function();
+    game.popScene();
+}
+    
 function site()
 {
     //現在電力会社、鉄道のことは考慮してないです。
