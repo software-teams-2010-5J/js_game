@@ -28,6 +28,13 @@ function scene_init(){
     title.backgroundColor = "brown";
     title.addChild(button_t);
 
+    //dice scene
+    dice_scene = new Scene();
+    //    dice_scene.addChild(button);
+    game.rootScene.addChild(button);
+    button.moveTo(800,600);
+    button.ontouchstart = dice;    
+    
     //site action scene
     site_scene = new Scene();
     var pink = new Sprite(960,720);
@@ -46,16 +53,16 @@ function scene_init(){
     black.moveTo(0,0);
     black.opacity = 0.4;
        
-    //game root scene 
-    game.rootScene.addChild(button);
-    button.moveTo(800,600);
-    turn_num = 0;
-    button.ontouchstart = dice;    
-    player[0].onenterframe= mono;
+    //game root scene     
+    turn_num = 0;    
+    //player[0].onenterframe= mono;
     player[0].onenterframe= kuma_mov;
-   
+    
     game.pushScene(title);
-    button_t.addEventListener("touchend", function(e) { game.popScene(); });   
+    button_t.addEventListener("touchend", function(e) { 
+	    treat = true;
+	    game.popScene();
+	});   
     
 }    
 function map_init(){
@@ -74,7 +81,12 @@ function map_init(){
 	      [,99,100,101,102,103,104,105,106,107,108,109],
 	      [,110,111,112,113,114,115,116,117,118,119,120],
 	      ];
-    
+    MDirect = [
+	       1,1,1,1,1,1,1,1,1,1,
+	       0,0,0,0,0,0,0,0,0,0,
+	       3,3,3,3,3,3,3,3,3,3,
+	       2,2,2,2,2,2,2,2,2,2,
+	       ]
     mapdirect=[
 	       [4,4,4,4,4,4,4,4,4,4,4,4,4],
 	       [4,3,3,3,3,3,3,3,3,3,3,2,4],

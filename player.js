@@ -2,7 +2,7 @@ var START_MONEY = 800;
 var START_PLACE = 8+48*11;
 var player=[];
 
-var Player = Class.create(Sprite, {
+var Player = Class.create(Sprite,{
 	initialize: function(input_name){
 	    Sprite.call(this,32,32);
 	    this.x = START_PLACE;

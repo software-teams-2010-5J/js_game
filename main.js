@@ -6,7 +6,7 @@ var site_scene;
 var dice_scene;
 var effect_scene;
 var turn_num;
-
+var treat;
 
 var PLAYER_NUM = 2;
 
@@ -17,6 +17,7 @@ var kuma;
 var map;
 var mapArray;
 var mapdirect;
+var MDirect;
 var WIDTH=960;
 var HEIGHT=720;
 
@@ -37,8 +38,6 @@ function preloadAssets(){
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
-
-    
     dice_scene = new Scene();
 
     mytheme = {
@@ -83,35 +82,34 @@ function init(){
     // kuma_init();
     player_init();
     scene_init();
-    //    game.addEventListener('enterframe',mono);
+    game.addEventListener('enterframe',mono);
 }
 function mono(){
-
+    if(turn_num == 0 && treat == true)
+	{
+	    console.log("your turn");
+	    //	    game.pushScene(dice_scene);
+	}
 }
 function dice()
 {
-    turn_num ++;	
-    if(turn_num == 0){
-	game.rootScene.addChild(button);
-    }else if(turn_num == PLAYER_NUM-1){
-	game.rootScene.removeChild(button);
-    }
-    if(t==1){
+    game.rootScene.removeChild(message_field);
+    game.rootScene.removeChild(use_message);
 	var r = Math.floor(Math.random() * 6) + 1;
-    this.text = "dice:"+r;
-    player[0].v = r;
-    player[0].point += r;
-    console.log(t);
-    t =0;
-    console.log("player[0].v = "+player[0].v);
+	this.text = "dice:"+r;
+	move(r);
+	turn_num++;
+	turn_num%=4;
+	if(turn_num == 0){
+	    game.rootScene.addChild(button);
+	}else if(turn_num == PLAYER_NUM-1){
+	    game.rootScene.removeChild(button);
+	}
 
-    }
 }
 
 function but()
 {
-    game.rootScene.removeChild(message_field);
-    game.rootScene.removeChild(use_message);
     if(t==1){
 	var r = Math.floor(Math.random() * 6) + 1;
 	kuma.v =2;
