@@ -2,6 +2,8 @@ function judge_site()
 {
     if(field[player[turn_num].point].effect_id <= 2)
 	site();
+    else
+	effect[field[player[turn_num].point].effect_id - 3].function();
 }
 
 function site()
