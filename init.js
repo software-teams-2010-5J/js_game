@@ -48,7 +48,9 @@ function scene_init(){
     var Yesbutton = new Button("Yes","light",MESSAGE_WINDOW_SIZE_Y,100);
     Yesbutton.ontouchstart = function(){
 	field[point].owner = turn_num;
+	console.log("購入前:"+player[turn_num].money);
 	player[turn_num].money -= field[point].value;
+	console.log("購入後:"+player[turn_num].money);
 	game.popScene();    
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);

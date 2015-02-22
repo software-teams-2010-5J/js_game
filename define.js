@@ -70,7 +70,6 @@ var msglabel;
 msglabel = new Label();
 msglabel.font = "32px monospace";
 msglabel.color = "#000000";
-msglabel.text = "移動が終了しましたえ";
 msglabel.x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
 msglabel.y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
 var turn_mes;
