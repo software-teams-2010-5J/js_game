@@ -1,11 +1,7 @@
 function judge_site()
 {
-    if(posx == 2 && posy == 1)
-	{
-	    turn_mes.text = "Owner :"+field.owner;
-	    game.pushScene(site_scene);
-	    
-	}
+    if(field[player[turn_num].point].effect_id <= 2)
+	site();
 }
 function move(r)
 {
