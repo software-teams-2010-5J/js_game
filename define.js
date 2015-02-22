@@ -1,4 +1,9 @@
 enchant();
+
+//root message window position
+var ROOT_MES_POS_X = 200;
+var ROOT_MES_POS_Y = 600;
+
 //ゲームウインドウサイズ
 var WIDTH = 960;
 var HEIGHT = 720;
@@ -72,6 +77,7 @@ msglabel.font = "32px monospace";
 msglabel.color = "#000000";
 msglabel.x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
 msglabel.y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
+
 var turn_mes;
 turn_mes = new Label();
 turn_mes.font = "32px monospace";
@@ -79,4 +85,12 @@ turn_mes.color = "#000000";
 turn_mes.text = "Owner :";
 turn_mes.x = 200 ;
 turn_mes.y = 200 ;
+
+var root_mes;
+root_mes = new Label();
+root_mes.font = "32px monospace";
+root_mes.color = "#000000";
+root_mes.text = "Owner :<br>a";
+root_mes.x = ROOT_MES_POS_X ;
+root_mes.y = ROOT_MES_POS_Y ;
 
