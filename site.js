@@ -24,12 +24,12 @@ function site()
 {
     //現在電力会社、鉄道のことは考慮してないです。
     point = player[turn_num].point;
-    msglabel.text = field[point].name + "\n price:" + field[point].value;
+    root_mes.text = field[point].name + "\n price:" + field[point].value;
     if(field[point].owner == null)
     {
 	console.log("所有者なし");
 	if(turn_num == 0){
-	    site_scene.addChild(msglabel);
+	    site_scene.addChild(root_mes);
 	    game.pushScene(site_scene);
 	}else{
 	    AI(1);
