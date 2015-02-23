@@ -103,3 +103,33 @@ root_mes.text = "Owner :<br>a";
 root_mes.x = MESSAGE_WINDOW_POSITION_X +10;
 root_mes.y = MESSAGE_WINDOW_POSITION_Y +5;
 
+
+    var Dicebutton = new Button("dice","light",MESSAGE_WINDOW_SIZE_Y,100);
+    Dicebutton.ontouchstart = function(){
+	var r = Math.floor(Math.random() * 6) + 1;
+	if(r % 2)
+	{
+	    effect_mes = "釈放";
+	    player[turn_num].status = NORMAL_STATUS;
+	    player[turn_num].jailer_count = 0;
+	}
+	else
+	{
+	    effect_mes = "残留";
+	    player[turn_num].jailer_count ++;
+	}
+
+	game.popScene()
+    };
+    Dicebutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
+    var Paybutton = new Button("pay","light",MESSAGE_WINDOW_SIZE_Y,100);
+    Paybutton.ontouchstart = function(){
+	effect_mes = "釈放";
+	player[turn_num].money -= 50;
+	player[turn_num].status = NORMAL_STATUS;
+	player[turn_num].jailer_count = 0;
+
+	game.popScene();
+    };
+    Paybutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
+    

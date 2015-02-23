@@ -19,4 +19,4 @@ var Player = Class.create(Sprite,{
 	    this.jailer_count = 0;
 	    game.rootScene.addChild(this);
 	}
-    });
+});

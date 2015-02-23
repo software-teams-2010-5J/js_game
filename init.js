@@ -136,8 +136,9 @@ function scene_init(){
     effect_scene.addChild(black);
     black.moveTo(0,0);
     black.opacity = 0.4;
-    message_effect = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);       
+    message_effect = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y); 
     effect_scene.addChild(message_effect); 
+      
     //game root scene     
     turn_num = 0;    
     //player[0].onenterframe= mono;

@@ -12,6 +12,8 @@ function judge_site()
 
 function effect_step()
 {
+    effect_scene.removeChild(Paybutton);
+    effect_scene.removeChild(Dicebutton);
     game.pushScene(effect_scene);    
     console.log("num"+field[player[turn_num].point].effect_id - 3);
     effect[field[player[turn_num].point].effect_id - 3].function();
