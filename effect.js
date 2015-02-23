@@ -48,6 +48,9 @@ effect[6] = {
     function: function(){
 	console.log("刑務所へ入れ");
 	root_mes.text = "刑務所へ入れ";
+	player[turn_num].point = 10;
+	player[turn_num].moveTo(48*1+16,48*11);
+	increment();
 	effect_scene.addChild(root_mes);
 	}
 };
