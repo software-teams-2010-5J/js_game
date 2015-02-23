@@ -77,7 +77,8 @@ function title_init(){
 		}
 	    else{
 		player[0].name = tb.value;
-	    game.popScene();
+		mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+		game.popScene();
 	    }
 	});
 }
@@ -110,7 +111,7 @@ function scene_init(){
 	console.log("購入前:"+player[turn_num].money);
 	player[turn_num].money -= field[point].value;
 	console.log("購入後:"+player[turn_num].money);
-	//mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+
 	console.log("turn_num"+turn_num);
 	sitf =1;
 	game.popScene();    
@@ -197,5 +198,9 @@ function mess_init()
 	    //  game.addEventListener('enterframe',function(e){ mess[i].text = player[i].name+"<br>:money:"+player[i].money;});
 	    game.rootScene.addChild(mess[i]);
 	}    
+    game.rootScene.addChild(root_message_field);
+    game.rootScene.addChild(root_mes);
+    root_mes.text = "your turn";
+    
     
 } 
