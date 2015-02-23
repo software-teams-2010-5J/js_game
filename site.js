@@ -6,19 +6,20 @@ function judge_site()
     else
     {
 	effect_step();
-	sitf =1;
+	sitf = 1;
     }
-	
 }
+
 function effect_step()
 {
+    effect_scene.removeChild(Paybutton);
+    effect_scene.removeChild(Dicebutton);
     game.pushScene(effect_scene);    
+    console.log("num"+field[player[turn_num].point].effect_id - 3);
     effect[field[player[turn_num].point].effect_id - 3].function();
-    
-    effect_scene.addEventListener("touchend", function(e) {    
-	    game.popScene();    
-	});   
-    //game.popScene();
+    effect_scene.addEventListener("touchend", function(e) { 
+	game.popScene();
+    });   
 }
 function site()
 {

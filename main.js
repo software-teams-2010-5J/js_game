@@ -192,7 +192,12 @@ function AI(q)
 }
 function dice()
 {
-    if(fl == 0){
+    if(player[turn_num].point == 10 && player[turn_num].status == JAILER)
+    {
+	judge_site();
+	increment();
+    }
+    else if(fl == 0){
 
 	var r = Math.floor(Math.random() * 6) + 1;
 	button.text = "dice:"+r;		

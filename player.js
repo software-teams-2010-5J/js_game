@@ -1,4 +1,6 @@
-var START_MONEY = 100;
+var NORMAL_STATUS = 0;
+var JAILER = 1;
+var START_MONEY = 1500;
 var START_PLACE = 8+48*11;
 var player=[];
 
@@ -13,6 +15,8 @@ var Player = Class.create(Sprite,{
 	    this.point = 0;
 	    this.name = input_name;
 	    this.v = 0;
+	    this.status = 0;
+	    this.jailer_count = 0;
 	    game.rootScene.addChild(this);
 	}
-    });
+});

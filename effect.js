@@ -1,5 +1,5 @@
 var effect = [];
-var effect_mes =new Label();
+var effect_mes = new Label();
 effect_mes.font = "16px monospace";
 effect_mes.width = 600;
 effect_mes.color = "#000000";
@@ -41,21 +41,92 @@ effect[4] = {
 	effect_mes.text = "物品税:100$支払う";
 	player[turn_num].money -= 100;
 	effect_scene.addChild(effect_mes);
-	}
+    }
 };
 effect[5] = {
     function: function(){
-	console.log("刑務所");
-	effect_mes.text = "刑務所";
 	effect_scene.addChild(effect_mes);
+	//囚人判定
+	if(player[turn_num].status == JAILER)
+	{
+	    
+	    console.log("刑務所");
+	    effect_mes.text = "刑務所";
+	    //プレイヤーであれば	    
+	    if(turn_num == 0)
+	    {
+		//３回目であれば
+		if(player[turn_num].jailer_count == 3)
+		{
+		    if(player[turn_num].money >= 50)
+		    {
+			//50ドル払い、釈放
+			player[turn_num].money -= 50;
+			player[turn_num].status = NORMAL_STATUS;
+		    }else{
+			//50ドルなければ終わり
+			game.pushScene(end);
+		    }
+		}else{
+		    //3回目でなければ
+		    //50ドル払うかサイコロふる。
+		    effect_scene.addChild(Dicebutton);
+		    effect_scene.addChild(Paybutton);	
+		    effect_scene.removeChild(Dicebutton);
+		    effect_scene.removeChild(Paybutton);	
+		    
+		}
+	    }else{
+		//プレイヤーでなれけば
+		if(player[turn_num].jailer_count == 3)
+		{
+		    if(player[turn_num].money >= 50)
+		    {
+			player[turn_num].money -= 50;
+			player[turn_num].status = NORMAL_STATUS;
+			player[turn_num].jailer_count = 0;
+			//CPUの所持金が50$以上であれば
+			//強制的に釈放させる
+		    }else{
+			game.pushScene(end);
+			//50ドルなければ終わり
+		    }
+		}else{
+		    //CPUの所持金が50$未満であれば
+		    //サイコロをふる
+		    var r = Math.floor(Math.random() * 6) + 1;
+		    if(r % 2)
+		    {
+			effect_mes = "釈放";
+			player[turn_num].status = NORMAL_STATUS;
+			player[turn_num].jailer_count = 0;
+		    }
+		    else
+		    {
+			effect_mes = "残留";
+			player[turn_num].jailer_count ++;
+		    }
+		    game.popScene()
+		}
+	    }
+	    increment();
+	}else{
+	    console.log("刑務所見学");
+	    effect_mes.text = "刑務所見学";
 	}
+	
+    }
 };
+
 effect[6] = {
-    function: function(){
-	console.log("刑務所へ入れ");
-	effect_mes.text = "刑務所へ入れ";
-	effect_scene.addChild(effect_mes);
-	}
+     function: function(){
+	 console.log("刑務所へ入れ");
+	 player[turn_num].point = 10;
+	 player[turn_num].moveTo(48*1+16,48*11);
+	 player[turn_num].status = JAILER;
+	 effect_scene.addChild(effect_mes);
+	 effect_mes.text = "刑務所へ入れ";
+    }
 };
 effect[7] = {
     function: function(){

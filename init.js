@@ -130,6 +130,7 @@ function scene_init(){
 
 	console.log("turn_num"+turn_num);
 	sitf =1;
+	game.popScene();    
 	game.popScene();
 	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました -"+field[point].value+"$";
 	root_mes_dialog(ttex);
@@ -154,8 +155,9 @@ function scene_init(){
     effect_scene.addChild(black);
     black.moveTo(0,0);
     black.opacity = 0.4;
-    message_effect = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);       
+    message_effect = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y); 
     effect_scene.addChild(message_effect); 
+      
     //game root scene     
     turn_num = 0;    
     //player[0].onenterframe= mono;
