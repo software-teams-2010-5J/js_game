@@ -9,8 +9,8 @@ var WIDTH = 960;
 var HEIGHT = 720;
 
 //メッセージウインドウサイズ
-var MESSAGE_WINDOW_SIZE_X = 500;
-var MESSAGE_WINDOW_SIZE_Y = 70;
+var MESSAGE_WINDOW_SIZE_X = 600;
+var MESSAGE_WINDOW_SIZE_Y = 80;
 var MESSAGE_WINDOW_POSITION_X = 50;
 var MESSAGE_WINDOW_POSITION_Y = 600;
 
@@ -88,9 +88,10 @@ turn_mes.y = 200 ;
 
 var root_mes;
 root_mes = new Label();
-root_mes.font = "32px monospace";
+root_mes.font = "16px monospace";
+root_mes.width = 600;
 root_mes.color = "#000000";
 root_mes.text = "Owner :<br>a";
-root_mes.x = ROOT_MES_POS_X ;
-root_mes.y = ROOT_MES_POS_Y ;
+root_mes.x = MESSAGE_WINDOW_POSITION_X +10;
+root_mes.y = MESSAGE_WINDOW_POSITION_Y +5;
 

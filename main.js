@@ -123,6 +123,7 @@ function AI(q)
 	    player[turn_num].money -= field[point].value;
 	    console.log("購入後:"+player[turn_num].money);
 	    console.log(player[turn_num].name+":購入しました");
+	    root_mes.text=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
 
 	
 	}else{
