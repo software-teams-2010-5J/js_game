@@ -1,4 +1,4 @@
-var START_MONEY = 1500;
+var START_MONEY = 100;
 var START_PLACE = 8+48*11;
 var player=[];
 

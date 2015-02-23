@@ -119,25 +119,29 @@ var loser;
 function judge(){
     var i;
     var t=0;
+    winner = false;
     loser = false;
+    winer = 0;
     for(i=0;i<PLAYER_NUM;i++)
 	{
 	    if(t<player[i].money)
 		{
-		    winner= i;
 		    t = player[i].money;
+		    winer = i;
 		}
 	    if(player[i].money<=0)
 		{
 		    loser = i;
+		    end_mes.text = "<br>Loser : <br>"+player[loser].name;
+		    game.pushScene(end);
 		}
 	}
-    if(loser != false){
-	end_mes.text = "WInner : "+player[winner].name+"<br>Loser : "+player[loser].name;
-	game.pushScene(end);
+    if(loser != 10){
+
+	
     }
 }
-	    
+
 function mono(){
     
     if(turn_num == 0 && treat == true && fl == 1 && sitf ==0)

@@ -37,7 +37,10 @@ function end_init()
     end_mes.font = "64px serif";
     end_mes.color = "red";
     end_mes.moveTo(400,200);
- 
+    end.addEventListener('touchstart', function() {
+	    location.reload();       
+        });
+   
 }
     
 
