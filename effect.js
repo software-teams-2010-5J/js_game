@@ -107,7 +107,6 @@ effect[5] = {
 			player[turn_num].jailer_count ++;
 		    }
 		    game.popScene()
-		    
 		}
 	    }
 	    increment();
