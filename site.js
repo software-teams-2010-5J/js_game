@@ -45,9 +45,13 @@ function site()
 	{
 	    //今レンタル料金0.5にしてます。
 	    console.log("player:"+player[turn_num].money+"owner"+player[field[point].owner].money);
+	    
 	    player[turn_num].money -= field[point].value * 0.5;
 	    player[field[point].owner].money += field[point].value * 0.5;
 	    console.log("player:"+player[turn_num].money+"owner"+player[field[point].owner].money);
+
+	    ttex = player[turn_num].name+":"+field[point].value*0.5+"$のレンタル料金が引かれます";
+	    root_mes_dialog(ttex);
 	    sitf=1;
 	}
     }

@@ -1,6 +1,6 @@
 var NORMAL_STATUS = 0;
 var JAILER = 1;
-var START_MONEY = 800;
+var START_MONEY = 1500;
 var START_PLACE = 8+48*11;
 var player=[];
 

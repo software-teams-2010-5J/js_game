@@ -22,8 +22,27 @@ function player_init()
 	{
 	    player[i] = new Player("Akira"+i);
 	    player[i].image = game.assets['images/chara1.png'];
+	    player[i].frame = [0,1,0,2];
 	}   
 }
+var end_mes = new Label();
+function end_init()
+{
+    var blac = new Sprite(960,720);
+    blac.image = game.assets['black.png'];
+    end = new Scene();
+    end.addChild(blac);
+    end.addChild(end_mes);
+    blac.opacity = 0.9;
+    end_mes.font = "64px serif";
+    end_mes.color = "red";
+    end_mes.moveTo(400,200);
+    end.addEventListener('touchstart', function() {
+	    location.reload();       
+        });
+   
+}
+    
 
 function kuma_init(){
     kuma.image = game.assets['images/chara1.png'];
@@ -76,7 +95,7 @@ function title_init(){
 		}
 	    else{
 		player[0].name = tb.value;
-		mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+		mess[turn_num].text = player[turn_num].name+":<br>money:"+player[turn_num].money;
 		game.popScene();
 	    }
 	});
@@ -113,7 +132,7 @@ function scene_init(){
 	sitf =1;
 	game.popScene();    
 	game.popScene();
-	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました -"+field[point].value+"$";
 	root_mes_dialog(ttex);
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
@@ -121,7 +140,7 @@ function scene_init(){
     Nobutton.ontouchstart = function(){
 	sitf =1;
 	game.popScene();
-	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	ttex=player[turn_num].name+":なにもしませんでした";
 	root_mes_dialog(ttex);
     };
     Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
@@ -192,16 +211,18 @@ function map_init(){
 function mess_init()
 {
     var i;
+    game.rootScene.addChild(mess_window);
     for(i=0;i<PLAYER_NUM;i++)
 	{
 	    mess[i] = new Label();
 	    mess[i].font = "32px monospace";
-	    mess[i].text = player[i].name+"<br>:money:"+player[i].money;
+	    mess[i].text = player[i].name+":<br>money:"+player[i].money;
 	    mess[i].x = 600;
 	    mess[i].y = (100 * i)+100;
 	    //  game.addEventListener('enterframe',function(e){ mess[i].text = player[i].name+"<br>:money:"+player[i].money;});
 	    game.rootScene.addChild(mess[i]);
 	}    
+
     game.rootScene.addChild(root_message_field);
     game.rootScene.addChild(root_mes);
     root_mes.text = "your turn";

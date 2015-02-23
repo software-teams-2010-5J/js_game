@@ -13,6 +13,8 @@ var pfl=0;
 var game;
 var button;
 var kuma;
+var end;
+
 
 var fl=0; //現状のターンのプレイヤーがサイコロふり済み(=1)かまだ（＝０）か
 
@@ -39,13 +41,13 @@ var SPRITE_HEIGHT = 280;
 var MAP_NUM = 10;
 var button_t;
 var message_site;
-
+var mess_window;
 function preloadAssets(){
     game = new Game(WIDTH,HEIGHT);
     button = new Button("dice","light",50,50);   
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
-
+    mess_window = new BaseMessageWindow(350,500,590,48);
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     root_message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     dice_scene = new Scene();
@@ -73,13 +75,12 @@ function init(){
     t=1;
 
     console.log("i");
+
     map_init();
-    // kuma_init();
     player_init();
-
     scene_init();
-
     game.addEventListener('enterframe',mono);
+    end_init();
 }
 
 function root_mes_dialog(r)
@@ -100,6 +101,7 @@ function root_mes_dialog(r)
 function increment()
 {
     disp();
+    judge();
     turn_num++;
     turn_num%=PLAYER_NUM;
     sitf = 0;
@@ -110,7 +112,34 @@ function increment()
 	{
 	    game.rootScene.addChild(button);
 	}
+}
+var winner;
+var loser;
 
+function judge(){
+    var i;
+    var t=0;
+    winner = false;
+    loser = false;
+    winer = 0;
+    for(i=0;i<PLAYER_NUM;i++)
+	{
+	    if(t<player[i].money)
+		{
+		    t = player[i].money;
+		    winer = i;
+		}
+	    if(player[i].money<=0)
+		{
+		    loser = i;
+		    end_mes.text = "<br>Loser : <br>"+player[loser].name;
+		    game.pushScene(end);
+		}
+	}
+    if(loser != 10){
+
+	
+    }
 }
 
 function mono(){
@@ -142,12 +171,12 @@ function AI(q)
 	    console.log("購入前:"+player[turn_num].money);
 	    player[turn_num].money -= field[point].value;
 	    console.log("購入後:"+player[turn_num].money);
-	    console.log(player[turn_num].name+":購入しました");
+	    console.log(player[turn_num].name+":購入しました -"+field[point].value+"$");
 	    
-	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました -"+field[point].value+"$";
 	    root_mes_dialog(ttex);
 	}else{
-	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しませんでした";
+	    ttex=player[turn_num].name+":なにもしませんでした";
 	    root_mes_dialog(ttex);
 	}
 	sitf=1;
@@ -179,7 +208,6 @@ function dice()
 		pfl=0;
 		if(turn_num == 0)
 		    {
-			console.log("sss:"+turn_num+":"+sitf+":"+fl+":"+Anf);
 			game.rootScene.removeChild(button);
 		    }
 	    });    
@@ -190,7 +218,7 @@ function disp()
     var i;
     for(i=0;i<PLAYER_NUM;i++)
 	{
-	    mess[i].text = player[i].name+"<br>:money:"+player[i].money;
+	    mess[i].text = player[i].name+":<br>money:"+player[i].money;
 	}
 }
 function but()
