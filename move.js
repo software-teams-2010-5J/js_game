@@ -21,6 +21,7 @@ function move(r)
 		    flag =1;
 		}
 	}
+    console.log("sss:"+turn_num+":"+sitf+":"+fl+":"+Anf);
     if(IFP != false){
 	console.log("IFP");
 	console.log("to:"+to+"from:"+from);
@@ -52,7 +53,7 @@ function move(r)
 		player[turn_num].tl.moveBy(0,-48*(to-from),30);
 	    }
 	    else if(p == 1){
-		console.log('s');
+		console.log('to -from :'+(to-from));
 		player[turn_num].tl.moveBy(-48*(to-from),0,30);
 	    }
 	    else if(p == 2){
@@ -64,7 +65,7 @@ function move(r)
 	}
     
     player[turn_num].point = to%40;   
-    console.log("new point:"+player[turn_num].point);
+    console.log(turn_num+":new point:"+player[turn_num].point);
   
 }
 function kuma_mov()

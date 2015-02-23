@@ -18,12 +18,11 @@ mytheme = {
     
 function player_init()
 {
-    for( i=0;i<PLAYER_NUM; i++)
+    for(i = 0;i < PLAYER_NUM; i++)
 	{
 	    player[i] = new Player("Akira"+i);
 	    player[i].image = game.assets['images/chara1.png'];
-	}
-    
+	}   
 }
 
 function kuma_init(){
@@ -61,7 +60,6 @@ function title_init(){
     tb.height = 100;
     tb.placeholder = "名前を入力してください";
     
-    
     button_t.addEventListener("touchend", function(e) { 
 	    treat = true;
 	    title.addChild(navigationBar);
@@ -81,9 +79,9 @@ function title_init(){
 	    game.popScene();
 	    }
 	});
-    
-}    
- 
+}
+
+
 
 function scene_init(){
     title_init();
@@ -108,12 +106,18 @@ function scene_init(){
     Yesbutton.ontouchstart = function(){
 	field[point].owner = turn_num;
 	player[turn_num].money -= field[point].value;
+	console.log("購入後:"+player[turn_num].money);
+	//mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+	console.log("turn_num"+turn_num);
+	sitf =1;
 	game.popScene();    
+	
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
     var Nobutton = new Button("No","light",MESSAGE_WINDOW_SIZE_Y,100);
     Nobutton.ontouchstart = function(){
-	game.popScene();    
+	sitf =1;
+	game.popScene();
     };
     Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
     
@@ -133,13 +137,13 @@ function scene_init(){
     turn_num = 0;    
     //player[0].onenterframe= mono;
     //player[0].onenterframe= kuma_mov;
-    
+    mess_init();    
     game.pushScene(title);
     button_t.addEventListener("touchend", function(e) { 
 	    treat = true;
 	    game.popScene();
     });   
-    
+
 }   
 function map_init(){
     map.image = game.assets['444.png'];
@@ -162,7 +166,7 @@ function map_init(){
 	       0,0,0,0,0,0,0,0,0,0,
 	       3,3,3,3,3,3,3,3,3,3,
 	       2,2,2,2,2,2,2,2,2,2,
-	       ]
+	       ];
     mapdirect=[
 	       [4,4,4,4,4,4,4,4,4,4,4,4,4],
 	       [4,3,3,3,3,3,3,3,3,3,3,2,4],
@@ -178,8 +182,23 @@ function map_init(){
 	       [4,0,1,1,1,1,1,1,1,1,1,1,4],
 	       [4,4,4,4,4,4,4,4,4,4,4,4,4],
 	       ];
-
+    
     map.loadData(mapArray);
     game.rootScene.addChild(map);
 }
 
+function mess_init()
+{
+    var i;
+    for(i=0;i<PLAYER_NUM;i++)
+	{
+	    mess[i] = new Label();
+	    mess[i].font = "32px monospace";
+	    mess[i].text = player[i].name+"<br>:money:"+player[i].money;
+	    mess[i].x = 600;
+	    mess[i].y = (100 * i)+100;
+	    //  game.addEventListener('enterframe',function(e){ mess[i].text = player[i].name+"<br>:money:"+player[i].money;});
+	    game.rootScene.addChild(mess[i]);
+	}    
+    
+} 

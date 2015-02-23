@@ -4,7 +4,10 @@ function judge_site()
     if(field[player[turn_num].point].effect_id <= 2)
 	site();
     else
- 	effect_step();
+    {
+	effect_step();
+	sitf =1;
+    }
 	
 }
 function effect_step()
@@ -17,7 +20,6 @@ function effect_step()
     });   
     //game.popScene();
 }
-    
 function site()
 {
     //現在電力会社、鉄道のことは考慮してないです。
@@ -29,6 +31,8 @@ function site()
 	if(turn_num == 0){
 	    site_scene.addChild(msglabel);
 	    game.pushScene(site_scene);
+	}else{
+	    AI(1);
 	}
     }
     else
@@ -43,6 +47,7 @@ function site()
 	    player[turn_num].money -= field[point].value * 0.5;
 	    player[field[point].owner].money += field[point].value * 0.5;
 	    console.log("player:"+player[turn_num].money+"owner"+player[field[point].owner].money);
+	    sitf=1;
 	}
     }
 
