@@ -22,6 +22,7 @@ function player_init()
 	{
 	    player[i] = new Player("Akira"+i);
 	    player[i].image = game.assets['images/chara1.png'];
+	    player[i].frame = [0,1,0,2];
 	}   
 }
 
@@ -76,7 +77,7 @@ function title_init(){
 		}
 	    else{
 		player[0].name = tb.value;
-		mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+		mess[turn_num].text = player[turn_num].name+":<br>money:"+player[turn_num].money;
 		game.popScene();
 	    }
 	});
@@ -190,16 +191,18 @@ function map_init(){
 function mess_init()
 {
     var i;
+    game.rootScene.addChild(mess_window);
     for(i=0;i<PLAYER_NUM;i++)
 	{
 	    mess[i] = new Label();
 	    mess[i].font = "32px monospace";
-	    mess[i].text = player[i].name+"<br>:money:"+player[i].money;
+	    mess[i].text = player[i].name+":<br>money:"+player[i].money;
 	    mess[i].x = 600;
 	    mess[i].y = (100 * i)+100;
 	    //  game.addEventListener('enterframe',function(e){ mess[i].text = player[i].name+"<br>:money:"+player[i].money;});
 	    game.rootScene.addChild(mess[i]);
 	}    
+
     game.rootScene.addChild(root_message_field);
     game.rootScene.addChild(root_mes);
     root_mes.text = "your turn";

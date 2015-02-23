@@ -39,13 +39,13 @@ var SPRITE_HEIGHT = 280;
 var MAP_NUM = 10;
 var button_t;
 var message_site;
-
+var mess_window;
 function preloadAssets(){
     game = new Game(WIDTH,HEIGHT);
     button = new Button("dice","light",50,50);   
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
-
+    mess_window = new BaseMessageWindow(350,500,590,48);
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     root_message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     dice_scene = new Scene();
@@ -174,7 +174,6 @@ function dice()
 		pfl=0;
 		if(turn_num == 0)
 		    {
-			console.log("sss:"+turn_num+":"+sitf+":"+fl+":"+Anf);
 			game.rootScene.removeChild(button);
 		    }
 	    });    
@@ -185,7 +184,7 @@ function disp()
     var i;
     for(i=0;i<PLAYER_NUM;i++)
 	{
-	    mess[i].text = player[i].name+"<br>:money:"+player[i].money;
+	    mess[i].text = player[i].name+":<br>money:"+player[i].money;
 	}
 }
 function but()
