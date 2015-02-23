@@ -41,9 +41,45 @@ effect[5] = {
     function: function(){
 	console.log("刑務所");
 	root_mes.text = "刑務所";
-	effect_scene.addChild(root_mes);
+	if(player[turn_num].status == JAILER && player[turn_num].money >= 50)
+	{
+	    var paybutton = new Button("pay","light",MESSAGE_WINDOW_SIZE_Y,100);
+	    eject_prison = function(){
+		player[turn_num].status == NORMAL_STATUS;
+		player[turn_num].money -= 50;
+		effect_mes.text = "50$支払って脱獄";
+		game.ontouchstart(){
+		    game.popScene();
+		}
+	    }
+	    if(player[turn_num].jailer_count == 3)
+		eject_prison();
+	    else{
+		paybutton.ontouchstart = eject_prison;
+		effect_scene.addChild(paybutton);	
+	    }
+	    var Nobutton = new Button("No","light",MESSAGE_WINDOW_SIZE_Y,100);
+	    Nobutton.ontouchstart = function(){
+		var r = Math.floor(Math.random() * 6) + 1;
+		effect_mes.text = r;
+		if(r % 2 == 0)
+		{
+		    player[turn_num].status = NORMAL_STATUS;
+		    effect_mes += "脱獄成功！";
+		}else{
+		    effect_mes += "脱獄失敗";
+		    player[turn_num].
+		}
+		game.popScene();
+	    }
+	    paybutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
+	    Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y)
+	    effect_scene.addChild(paybutton);
+	    effect_scene.addChild(effect_mes);
+
 	}
-};
+    }
+}
 effect[6] = {
     function: function(){
 	console.log("刑務所へ入れ");

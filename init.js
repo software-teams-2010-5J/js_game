@@ -111,7 +111,6 @@ function scene_init(){
 	console.log("turn_num"+turn_num);
 	sitf =1;
 	game.popScene();    
-	
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
     var Nobutton = new Button("No","light",MESSAGE_WINDOW_SIZE_Y,100);

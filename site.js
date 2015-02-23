@@ -14,7 +14,6 @@ function effect_step()
 {
     game.pushScene(effect_scene);    
     effect[field[player[turn_num].point].effect_id - 3].function();
-    
     effect_scene.addEventListener("touchend", function(e) { 
 	game.popScene();
     });   
