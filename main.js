@@ -28,6 +28,11 @@ var HEIGHT=720;
 var message_field;
 var root_message_field;
 
+var premes1="";
+var premes2="";
+var premes3="";
+var premes4="";
+
 var use_message;
 var SPRITE_WIDTH  = 320;
 var SPRITE_HEIGHT = 280;
@@ -40,6 +45,7 @@ function preloadAssets(){
     button = new Button("dice","light",50,50);   
     kuma = new Sprite(32,32);
     map = new Map(48, 48);
+
     message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     root_message_field = new BaseMessageWindow(MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_SIZE_Y, MESSAGE_WINDOW_POSITION_X,MESSAGE_WINDOW_POSITION_Y);
     dice_scene = new Scene();
@@ -76,6 +82,21 @@ function init(){
     game.addEventListener('enterframe',mono);
 }
 
+function root_mes_dialog(r)
+{
+    if(r ==""){
+	game.rootScene.addChild(root_mes);
+    }
+    else{
+	premes4 = premes3;
+	premes3 = premes2;
+	premes2 = premes1;
+	premes1 = r;
+	root_mes.text=premes1+"<br>"+premes2+"<br>"+premes3+"<br>"+premes4;
+	game.rootScene.addChild(root_mes);
+	console.log(root_mes.text);
+    }
+}
 function increment()
 {
     disp();
@@ -98,13 +119,11 @@ function mono(){
 	{    
 	    if(Anf == 1 && pfl ==0){
 		pfl =1;
-		console.log("sfafafafaf");
 		judge_site();
 	    }   
 	}
     if(turn_num != 0 && treat == true && sitf ==0)
 	{
-	    //game.rootScene.removeChild(button);
 	    if(fl == 0 && pfl ==0)
 		AI(2);
 	    if(fl == 1 && Anf == 1 && pfl ==0)
@@ -113,6 +132,7 @@ function mono(){
     if(sitf ==1 && Anf==1 && fl ==1){
 	increment();}
 }
+var ttex;
 function AI(q)
 {
     if(q==1){
@@ -123,10 +143,12 @@ function AI(q)
 	    player[turn_num].money -= field[point].value;
 	    console.log("購入後:"+player[turn_num].money);
 	    console.log(player[turn_num].name+":購入しました");
-	    root_mes.text=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
-	
+	    
+	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	    root_mes_dialog(ttex);
 	}else{
-	    root_mes.text=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しませんでした";
+	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しませんでした";
+	    root_mes_dialog(ttex);
 	}
 	sitf=1;
     }
@@ -154,7 +176,6 @@ function dice()
 		    {
 			console.log("sss:"+turn_num+":"+sitf+":"+fl+":"+Anf);
 			game.rootScene.removeChild(button);
-
 		    }
 	    });    
     }
@@ -189,5 +210,3 @@ function but()
 	t=0;
     }
 }
-
-

@@ -78,6 +78,14 @@ msglabel.color = "#000000";
 msglabel.x = MESSAGE_WINDOW_POSITION_X + MESSAGE_MARGIN_X;
 msglabel.y = MESSAGE_WINDOW_POSITION_Y + MESSAGE_MARGIN_Y;
 
+var site_mes;
+site_mes = new Label();
+site_mes.font = "16px monospace";
+site_mes.color = "#000000";
+site_mes.text = "";
+site_mes.x = MESSAGE_WINDOW_POSITION_X +10;
+site_mes.y = MESSAGE_WINDOW_POSITION_Y +5;
+
 var turn_mes;
 turn_mes = new Label();
 turn_mes.font = "32px monospace";
@@ -93,5 +101,5 @@ root_mes.width = 600;
 root_mes.color = "#000000";
 root_mes.text = "Owner :<br>a";
 root_mes.x = MESSAGE_WINDOW_POSITION_X +10;
-xroot_mes.y = MESSAGE_WINDOW_POSITION_Y +5;
+root_mes.y = MESSAGE_WINDOW_POSITION_Y +5;
 

@@ -111,20 +111,23 @@ function scene_init(){
 
 	console.log("turn_num"+turn_num);
 	sitf =1;
-	game.popScene();    
-	
+	game.popScene();
+	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	root_mes_dialog(ttex);
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
     var Nobutton = new Button("No","light",MESSAGE_WINDOW_SIZE_Y,100);
     Nobutton.ontouchstart = function(){
 	sitf =1;
 	game.popScene();
+	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	root_mes_dialog(ttex);
     };
     Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
     
     site_scene.addChild(Yesbutton);
     site_scene.addChild(Nobutton);	
-
+    
     //effect action scene
     effect_scene = new Scene();
     var black = new Sprite(960,720);
@@ -200,6 +203,5 @@ function mess_init()
     game.rootScene.addChild(root_message_field);
     game.rootScene.addChild(root_mes);
     root_mes.text = "your turn";
-    
-    
+    premes1 = "your turn";   
 } 
