@@ -113,7 +113,7 @@ function scene_init(){
 	console.log("turn_num"+turn_num);
 	sitf =1;
 	game.popScene();
-	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました -"+field[point].value+"$";
 	root_mes_dialog(ttex);
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
@@ -121,7 +121,7 @@ function scene_init(){
     Nobutton.ontouchstart = function(){
 	sitf =1;
 	game.popScene();
-	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	ttex=player[turn_num].name+":なにもしませんでした";
 	root_mes_dialog(ttex);
     };
     Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);

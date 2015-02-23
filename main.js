@@ -74,11 +74,8 @@ function init(){
 
     console.log("i");
     map_init();
-    // kuma_init();
     player_init();
-
     scene_init();
-
     game.addEventListener('enterframe',mono);
 }
 
@@ -142,12 +139,12 @@ function AI(q)
 	    console.log("購入前:"+player[turn_num].money);
 	    player[turn_num].money -= field[point].value;
 	    console.log("購入後:"+player[turn_num].money);
-	    console.log(player[turn_num].name+":購入しました");
+	    console.log(player[turn_num].name+":購入しました -"+field[point].value+"$");
 	    
-	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました -"+field[point].value+"$";
 	    root_mes_dialog(ttex);
 	}else{
-	    ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しませんでした";
+	    ttex=player[turn_num].name+":なにもしませんでした";
 	    root_mes_dialog(ttex);
 	}
 	sitf=1;
