@@ -25,6 +25,21 @@ function player_init()
 	    player[i].frame = [0,1,0,2];
 	}   
 }
+var end_mes = new Label();
+function end_init()
+{
+    var blac = new Sprite(960,720);
+    blac.image = game.assets['black.png'];
+    end = new Scene();
+    end.addChild(blac);
+    end.addChild(end_mes);
+    blac.opacity = 0.9;
+    end_mes.font = "64px serif";
+    end_mes.color = "red";
+    end_mes.moveTo(400,200);
+ 
+}
+    
 
 function kuma_init(){
     kuma.image = game.assets['images/chara1.png'];

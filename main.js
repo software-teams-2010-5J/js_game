@@ -13,6 +13,8 @@ var pfl=0;
 var game;
 var button;
 var kuma;
+var end;
+
 
 var fl=0; //現状のターンのプレイヤーがサイコロふり済み(=1)かまだ（＝０）か
 
@@ -73,10 +75,12 @@ function init(){
     t=1;
 
     console.log("i");
+
     map_init();
     player_init();
     scene_init();
     game.addEventListener('enterframe',mono);
+    end_init();
 }
 
 function root_mes_dialog(r)
@@ -97,6 +101,7 @@ function root_mes_dialog(r)
 function increment()
 {
     disp();
+    judge();
     turn_num++;
     turn_num%=PLAYER_NUM;
     sitf = 0;
@@ -107,9 +112,32 @@ function increment()
 	{
 	    game.rootScene.addChild(button);
 	}
-
 }
+var winner;
+var loser;
 
+function judge(){
+    var i;
+    var t=0;
+    loser = false;
+    for(i=0;i<PLAYER_NUM;i++)
+	{
+	    if(t<player[i].money)
+		{
+		    winner= i;
+		    t = player[i].money;
+		}
+	    if(player[i].money<=0)
+		{
+		    loser = i;
+		}
+	}
+    if(loser != false){
+	end_mes.text = "WInner : "+player[winner].name+"<br>Loser : "+player[loser].name;
+	game.pushScene(end);
+    }
+}
+	    
 function mono(){
     
     if(turn_num == 0 && treat == true && fl == 1 && sitf ==0)
