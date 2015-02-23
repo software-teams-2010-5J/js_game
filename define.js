@@ -93,5 +93,5 @@ root_mes.width = 600;
 root_mes.color = "#000000";
 root_mes.text = "Owner :<br>a";
 root_mes.x = MESSAGE_WINDOW_POSITION_X +10;
-root_mes.y = MESSAGE_WINDOW_POSITION_Y +5;
+xroot_mes.y = MESSAGE_WINDOW_POSITION_Y +5;
 

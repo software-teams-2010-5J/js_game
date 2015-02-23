@@ -33,7 +33,7 @@ function kuma_init(){
     kuma.scaleY = 0.8;
     game.rootScene.addChild(kuma);
 }
-var tb;
+
 var name;
 function title_init(){
     //title scene 
@@ -50,6 +50,7 @@ function title_init(){
     lbl.width = 100;
     lbl.textAlign = "center";
     lbl.color = "#ffffff";
+    
     var navigationBar = new NavigationBar(lbl);
     var bt = new Button("input name","light",50,50);
     tb.moveTo(WIDTH/2 -50, 200);
@@ -67,7 +68,6 @@ function title_init(){
 	    title.addChild(bt);
 	    title.addChild(lbl);
 	    title.removeChild(button_t);
-	    //   game.popScene();
 	});       
     bt.addEventListener("touchend",function(e){
 	    if(tb.value =="")
@@ -140,11 +140,7 @@ function scene_init(){
     //player[0].onenterframe= kuma_mov;
     mess_init();    
     game.pushScene(title);
-    button_t.addEventListener("touchend", function(e) { 
-	    treat = true;
-	    game.popScene();
-    });   
-
+    
 }   
 function map_init(){
     map.image = game.assets['444.png'];

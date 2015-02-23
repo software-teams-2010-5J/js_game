@@ -78,7 +78,7 @@ function init(){
 
 function increment()
 {
-    mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+    disp();
     turn_num++;
     turn_num%=PLAYER_NUM;
     sitf = 0;
@@ -124,10 +124,9 @@ function AI(q)
 	    console.log("購入後:"+player[turn_num].money);
 	    console.log(player[turn_num].name+":購入しました");
 	    root_mes.text=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
-
 	
 	}else{
-	    
+	    root_mes.text=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しませんでした";
 	}
 	sitf=1;
     }
@@ -160,7 +159,14 @@ function dice()
 	    });    
     }
 }
-
+function disp()
+{
+    var i;
+    for(i=0;i<PLAYER_NUM;i++)
+	{
+	    mess[i].text = player[i].name+"<br>:money:"+player[i].money;
+	}
+}
 function but()
 {
     if(t==1){
