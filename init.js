@@ -33,7 +33,7 @@ function kuma_init(){
     kuma.scaleY = 0.8;
     game.rootScene.addChild(kuma);
 }
-var tb;
+
 var name;
 function title_init(){
     //title scene 
@@ -50,6 +50,7 @@ function title_init(){
     lbl.width = 100;
     lbl.textAlign = "center";
     lbl.color = "#ffffff";
+    
     var navigationBar = new NavigationBar(lbl);
     var bt = new Button("input name","light",50,50);
     tb.moveTo(WIDTH/2 -50, 200);
@@ -67,7 +68,6 @@ function title_init(){
 	    title.addChild(bt);
 	    title.addChild(lbl);
 	    title.removeChild(button_t);
-	    //   game.popScene();
 	});       
     bt.addEventListener("touchend",function(e){
 	    if(tb.value =="")
@@ -76,7 +76,8 @@ function title_init(){
 		}
 	    else{
 		player[0].name = tb.value;
-	    game.popScene();
+		mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+		game.popScene();
 	    }
 	});
 }
@@ -107,22 +108,27 @@ function scene_init(){
 	field[point].owner = turn_num;
 	player[turn_num].money -= field[point].value;
 	console.log("購入後:"+player[turn_num].money);
-	//mess[turn_num].text = player[turn_num].name+"<br>:money:"+player[turn_num].money;
+
 	console.log("turn_num"+turn_num);
 	sitf =1;
 	game.popScene();    
+	game.popScene();
+	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	root_mes_dialog(ttex);
     };
     Yesbutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X,MESSAGE_WINDOW_POSITION_Y);
     var Nobutton = new Button("No","light",MESSAGE_WINDOW_SIZE_Y,100);
     Nobutton.ontouchstart = function(){
 	sitf =1;
 	game.popScene();
+	ttex=player[turn_num].name+":"+field[player[turn_num].point].name+"を購入しました";
+	root_mes_dialog(ttex);
     };
     Nobutton.moveTo(MESSAGE_WINDOW_POSITION_X+MESSAGE_WINDOW_SIZE_X+100,MESSAGE_WINDOW_POSITION_Y);
     
     site_scene.addChild(Yesbutton);
     site_scene.addChild(Nobutton);	
-
+    
     //effect action scene
     effect_scene = new Scene();
     var black = new Sprite(960,720);
@@ -138,11 +144,7 @@ function scene_init(){
     //player[0].onenterframe= kuma_mov;
     mess_init();    
     game.pushScene(title);
-    button_t.addEventListener("touchend", function(e) { 
-	    treat = true;
-	    game.popScene();
-    });   
-
+    
 }   
 function map_init(){
     map.image = game.assets['444.png'];
@@ -199,5 +201,8 @@ function mess_init()
 	    //  game.addEventListener('enterframe',function(e){ mess[i].text = player[i].name+"<br>:money:"+player[i].money;});
 	    game.rootScene.addChild(mess[i]);
 	}    
-    
+    game.rootScene.addChild(root_message_field);
+    game.rootScene.addChild(root_mes);
+    root_mes.text = "your turn";
+    premes1 = "your turn";   
 } 

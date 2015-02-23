@@ -6,29 +6,29 @@ function judge_site()
     else
     {
 	effect_step();
-	sitf =1;
+	sitf = 1;
     }
-	
 }
+
 function effect_step()
 {
     game.pushScene(effect_scene);    
+    console.log("num"+field[player[turn_num].point].effect_id - 3);
     effect[field[player[turn_num].point].effect_id - 3].function();
     effect_scene.addEventListener("touchend", function(e) { 
 	game.popScene();
     });   
-    //game.popScene();
 }
 function site()
 {
     //現在電力会社、鉄道のことは考慮してないです。
     point = player[turn_num].point;
-    root_mes.text = field[point].name + "\n price:" + field[point].value;
+    site_mes.text = field[point].name + "\n price:" + field[point].value;
     if(field[point].owner == null)
     {
 	console.log("所有者なし");
 	if(turn_num == 0){
-	    site_scene.addChild(root_mes);
+	    site_scene.addChild(site_mes);
 	    game.pushScene(site_scene);
 	}else{
 	    AI(1);
